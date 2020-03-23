@@ -1,0 +1,110 @@
+<extend name="Public/base" />
+
+<block name="style">
+    <link rel="stylesheet" href="__CSS__/logoba/6-2-2-1shejidingdan.css">
+</block>
+
+<block name="content">
+    <div class="sj_tab">
+        <ul>
+            <li class="tab xzhong" onclick="toggleStatus(this, -1);"><text>全部</text></li>
+            <li class="tab" onclick="toggleStatus(this, 0);"><text>待支付</text></li>
+            <li class="tab" onclick="toggleStatus(this, 1);"><text>进行中</text></li>
+            <li class="tab" onclick="toggleStatus(this, 6);"><text>已完成</text></li>
+            <li class="tab" onclick="toggleStatus(this, 11);"><text>已取消</text></li>
+        </ul>
+    </div>
+
+    <div class="cont scroll-append-box">
+
+    </div>
+
+</block>
+<block name="script">
+    <script src="__JS__/logoba/order-handle.js"></script>
+    <script>
+        var target = '{:U("Center/getOrders")}', type = '{$type}', status = -1, from = 'list', u_cpn_id = 0;
+
+        function getHtml(data) {
+            var html = '<div class="dingdan">'+
+                        '<ul onclick="javascript:window.location.href=\'/Center/detail/type/'+type+'/order_sn/'+data.order_sn+'\'">'+
+                            '<li>'+
+                                '<span>订单编号：'+data.order_sn+'</span><p>'+data.status_name+'</p>'+
+                            '</li>';
+
+                    if (data.service_list.logo != null) {
+                    html +='<li>'+
+                                '<span>'+data.service_list.logo.service_name+'</span><p>￥'+data.service_list.logo.price+'</p>'+
+                            '</li>';
+                    }
+
+                    if (data.service_list.mark != null) {
+                    html +='<li>'+
+                                '<span>'+data.service_list.mark.service_name+'</span><p>￥'+data.service_list.mark.detail_total+'</p>'+
+                            '</li>';
+                    }
+
+                    if (data.service_list.graphic != null) {
+                        for(var i in data.service_list.graphic) {
+                    html += '<li>'+
+                                '<span>'+data.service_list.graphic[i].service_name+'</span><p>￥'+data.service_list.graphic[i].detail_total+'</p>'+
+                            '</li>';
+                        }
+                    }
+
+                    html += '<li class="sj_p">'+
+                                '<span>下单时间</span><p>'+data.create_time+'</p>'+
+                            '</li>'+
+                        '</ul>'+
+                        '<div class="hejijine">'+
+                            '<p>合计：￥<span>'+data.order_amounts+'</span></p>';
+                    // 判断状态按钮
+                    if (data.status == 0) {
+                        html += '<button class="queren" type="button" onclick="payOrder(this,1);" data-sn="'+data.order_sn+'" data-price="'+data.order_amounts+'">支付</button>'+
+                                '<button class="quxiao" type="button" onclick="cancelOrder(this);" data-sn="'+data.order_sn+'">取消</button>';
+                    } else if (data.status == 1) {
+                        html += '<button class="queren" type="button" onclick="confirmOrder(this);" data-sn="'+data.order_sn+'">确认完成</button>';
+                    } else if (data.status == 6) {
+                        html += '';
+                    } else if (data.status == 11) {
+                        html += '<button class="quxiao" type="button" onclick="delOrder(this);" data-sn="'+data.order_sn+'">删除订单</button>';
+                    } else {
+
+                    }
+                html += '</div>'+
+                    '</div>';
+
+                return html;
+
+        }
+        //创建ajax data参数
+        function getQuery() {
+            return {p:p,type:type,status:status};
+        }
+        function noMore() {
+            scroll = false;
+            showPop('无更多数据', 'error', 1500, 'callback');
+        }
+        function error_callback() {
+            
+        }
+
+        function error_callback(){}
+        function success_callback(){}
+
+        // 状态切换
+        function toggleStatus(o, s) {
+            $(o).parent().find('li').removeClass('xzhong');
+            $(o).addClass('xzhong');
+            status = s; p = 1; append = false; scroll = true;
+            getList();
+        }
+
+        // 如果引入了scroll.js 并且改页面需要滚动加载 则设置
+        var scroll = true;
+
+    </script>
+
+    <script type="text/javascript" src="__JS__/scroll.js"></script>
+    <script src="__JS__/common.js"></script>
+</block>

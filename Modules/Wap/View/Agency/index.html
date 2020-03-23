@@ -1,0 +1,101 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+	<link rel="stylesheet" href="__CSS__/bmdel.css" />
+    <link rel="stylesheet" href="__CSS__/xsgscot.css" />
+</block>
+
+<block name="content">
+
+	<div class="bmwbox">
+		<div class="bmheas">
+			<img src="__IMG__/logo.png" />
+			<p class="bmyear"><a>————</a><span>2020</span><a>————</a></p>
+			<span class="btext">全国海选分赛区承办单位公示	</span>
+		</div>
+		
+		<div class="xsdata litrpar">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>赛区</th>
+						<th>承办单位</th>
+						<th>咨询电话</th>
+					</tr>
+				</thead>
+				<tbody>
+					<volist name="agencys" id="agency">
+						<tr data-id="{$agency['agency_id']}">
+							<th>{$agency['title']}</th>
+							<th>{$agency['agency']}</th>
+							<th>{$agency['tel']}</th>
+						</tr>
+					</volist>
+				</tbody>
+			</table>
+		</div>
+		
+	    <div class="foottxt" >
+	    	点击对应省份，了解地市县承办单位
+	    </div>
+	
+	    <!--省份承办单位-->
+	    
+	    <div class="dwbox" style="display: none;">
+	    	<div class="dwcont xsdata">
+	    		<div class="closa"><img src="__IMG__/closc.png"/></div>
+	    		<table border="0" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>赛区</th>
+						<th>地址</th>
+						<th>咨询电话</th>
+					</tr>
+				</thead>
+                <tbody class="ccc">
+
+                </tbody>
+			</table>
+		
+	    	</div>
+	    </div>
+	
+	</div>
+</block>
+	
+<block name="footer-script">
+	<script>
+		$(function(){
+			$(".closa").click(function(){
+				$(".dwbox").hide();
+			})
+		})
+	</script>
+	<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js" ></script>
+    <script>
+    	$(function(){
+    		$('.litrpar tbody tr').click(function(){
+                var agency_id = $(this).attr('data-id');
+
+                $.post('{:U("Agency/getAudition")}',{agency_id:agency_id}).success(function(data) {
+                  if (data.status == 1) {
+                    var html = '';
+                    for(var i in data.data) {
+                        html += "<tr>"+
+                                    "<th>"+data.data[i].title+"</th>"+
+                                    "<th>"+data.data[i].address+"</th>"+
+                                    "<th>"+data.data[i].tel+"</th>"+
+                                "</tr>";
+                    }
+
+                    $('.ccc').html(html);
+                  } else {
+                      
+                  }
+                });
+
+    			$(".dwbox").show();
+    		})
+    	})
+    </script>
+</block>

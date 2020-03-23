@@ -1,0 +1,121 @@
+.logincont{
+            width: 100%;
+            min-width: 1190px;
+            background: -moz-linear-gradient(top,  #C85649,#E49C71);
+            background: -webkit-linear-gradient(top ,#C85649,#E49C71 );
+            background: -o-linear-gradient(top,#C85649,#E49C71);
+            background: -ms-linear-gradient(top, #C85649,#E49C71 );
+            background: linear-gradient(top, #C85649,#E49C71);
+            /*height: 774px;*/
+            text-align: center;
+            
+           padding: 100px 0;
+        }
+        .loghead{
+            
+            box-sizing: border-box;
+            color: white;
+            font-size: 40px;
+        }
+        .logname{
+            margin-top: 44px !important;
+            width: 550px;
+            margin: auto;
+        }
+        .logname span{
+            color: white;
+            font-size: 14px;
+            width:160px;
+            display: inline-block;text-align: right;
+        }
+        .logname input{
+            width: 355px;
+            height: 30px;
+            border-radius: 6px;
+            border: none;
+            margin-bottom: 13px;
+            padding-left: 10px;
+            box-sizing: border-box;
+        }
+        .gasxa select{
+            width: 355px;
+            height: 30px;
+            border-radius: 6px;
+            border: none;
+            margin-bottom: 13px;
+            padding-left: 10px;
+            box-sizing: border-box;
+            color: #666666;
+            
+        }
+        .logname i
+        {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: white;
+        }
+        .logpawd{margin-top: 0 !important;
+        position: relative;
+        }
+        .ferget{
+            color: white;
+            font-size: 14px;
+            position: absolute;
+            bottom: -13px;
+            left: 173px;
+        }
+        .loginbtn{
+            width: 143px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 12px;
+            background: #FFE071;
+            color: #5B3622;
+            margin-top:30px !important;
+            margin: auto;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        
+.saiqucont a{
+        display: inline-block;
+        width: 355px;
+        display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+
+    }
+    
+    .saiqucont  select{
+        width: 116px;
+        height: 26px;
+        border-radius: 6px;
+        margin-bottom: 13px;
+            color: #666666;
+    }
+    .gerenml span{
+        vertical-align: top;
+        padding-top: 8px;
+    }
+    .gerenml textarea{
+        width: 355px;
+        height: 140px;
+        border-radius: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+        outline: none;
+        border: none;
+        margin-bottom: 10px;
+    }
+    .loghead span{
+            font-size: 16px;
+        }
+        .loghead a{
+            font-size: 16px;
+            color: #E9E04F;
+        }

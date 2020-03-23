@@ -1,0 +1,82 @@
+.xsdata{
+			margin-top: 0.9rem;
+			padding: 0 0.2rem;
+		}
+		.xsdata table{
+			width: 100%;
+			height: auto;
+			text-align: center;
+		}
+		.xsdata table thead tr th{
+			font-size: 0.4rem;
+			color: #020202;
+			height: 0.92rem;
+			background: #DB9437;
+		}
+		.xsdata table tbody tr th{
+			color: white;
+			font-size: 0.28rem;
+			height: 0.82rem;
+			
+		}
+		.xsdata table tr th{
+			border-bottom: 0.02rem solid #000000;
+			border-left: 0.02rem solid #000000;
+		}
+		.xsdata table thead tr th{
+			border-top: 0.02rem solid #000000;
+		}
+		.xsdata table tr th:last-child{
+			border-bottom: 0.02rem solid #000000;
+		}
+		.xsdata table tr th:last-child{
+			border-right: 0.02rem solid #000000;
+		}
+		
+
+.xsdata table  tr th{
+		min-height: 0.82rem;
+		padding: 0.3rem 0.2rem;
+	}
+	.xsdata table tr th:first-child{
+		 white-space:nowrap;
+		 
+	}
+	.foottxt{
+		margin-top: 0.3rem;
+		text-align: center;
+		font-size: 0.24rem;
+		color: #FEBD69;
+	}
+	body,html{
+		position: relative;
+	}
+	.dwbox{position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.6);
+	}
+	/*.dwcont {position: absolute;}*/
+	.closa{
+		position: absolute;
+		width: 0.3rem;
+		height: 0.32rem;
+		right: 0.36rem;
+		top: 1.3rem;
+	}
+	.dwcont{
+		margin-top: 1.9rem;
+	}
+	.dwcont table{
+		background: -moz-linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+    background: -webkit-linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+    background: -o-linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+    background: -ms-linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+    background: linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+	}
+	.closa img{
+		width: 100%;
+		height: 100%;
+	}

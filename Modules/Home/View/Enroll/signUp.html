@@ -1,0 +1,434 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+    <link rel="stylesheet" href="__CSS__/index.css" />
+    <link rel="stylesheet" href="__CSS__/login.css" />
+    <link rel="stylesheet" href="__CSS__/signup.css" />
+    <style>
+      /*.logname{margin-left: 32%}*/
+    </style>
+    <style>
+      .logname{
+            display: flex;
+            align-items: center;;
+            justify-content: flex-start;
+          }
+          .consa{
+            width: 355px !important;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            justify-content: flex-start;
+            text-align:left !important;
+          }
+          .saiqucont select{
+            width: 115px !important;
+          }
+          .logname > span:first-child{
+            margin-top: -15px;
+          }
+          .logname i{
+            margin-left: 5px; 
+            margin-top: -15px;
+          }
+          .saiqucont .coansw{
+            display: inline-block;
+            width: 355px;
+          }
+          .saiqucont .coansw{
+            display: flex;;
+            align-items: center;
+            justify-content: space-between;
+            
+          }
+    </style>
+</block>
+
+<block name="content">
+
+	<div class="logincont">
+		<div class="loghead">海选报名通道</div>
+		<div class="logname">
+			<span>姓名：</span>
+			<input type="text" class="fsnum" name="name" placeholder="请输入姓名" />
+			<i></i>
+		</div>
+		<div class="logpawd logname">
+      <span>身份证号：</span>
+      <input type="text" class="pwds" name="id_num" placeholder="请输入身份证号或港澳台居民证件号" />
+      <i></i>
+    </div>
+		<div class="logpawd logname">
+			<span>手机号码：</span>
+			<input type="text" class="pwds" name="mobile" placeholder="请输入手机号" />
+			<i></i>
+		</div>
+		<div class="logpawd logname">
+			<span>工作单位/学校名称：</span>
+			<input type="text" class="pwds" name="agency" placeholder="请输入工作单位/学校名称" />
+			<i></i>
+		</div>
+		<div class="logpawd logname">
+			<span>邮箱认证：</span>
+			<input type="text" class="pwds" name="email" placeholder="请输入您的常用邮箱" />
+		</div>
+
+		<div class="logpawd logname gasxa">
+			<span>职业：</span>
+			<select name="profession" class="profession">
+				<option value="">——请选择——</option>
+                <volist name="professions" id="profession">
+				    <option value="{$profession}">{$profession}</option>
+                </volist>
+			</select>
+			<i></i>
+		</div>
+		<div class="logpawd logname gasxa">
+			<span>报名类目：</span>
+			<select name="classes" class="classes">
+				<option value="">——请选择——</option>
+				<volist name="classes" id="classe">
+                    <option value="{$classe}">{$classe}</option>
+                </volist>
+			</select>
+			<i></i>
+		</div>
+		
+		<div class="logpawd logname">
+			<span>登录密码：</span>
+			<input type="password" class="pwds" name="password" placeholder="请设置登录密码" />
+			<i></i>
+		</div>
+		<div class="logpawd logname">
+			<span>确认密码：</span>
+			<input type="password" class="pwds" name="re_password" placeholder="请输入确认密码" />
+			<i></i>
+		</div>
+		<div class="logpawd logname saiqucont" data-toggle="distpicker"  >
+			<span>赛区：</span>
+      <span class="consa saiqu">
+				<select class="form-control" name="province_name" id="province1" class="province_name"></select>
+        <select class="form-control" name="city_name" id="city1" class="city_name"></select>
+        <select class="form-control" name="area_name" id="district1" class="area_name"></select>
+      </span>
+			<i></i>
+		</div>
+		<!-- <div class="logpawd logname gasxa">
+			<span>高校赛区：</span>
+			<select name="college_division" class="college_division">
+				<option value="">——请选择——</option>
+				<volist name="colleges" id="college">
+            <option value="{$college}">{$college}</option>
+        </volist>
+			</select>
+			<i></i>
+		</div> -->
+    <div class="logpawd logname saiqucont" >
+      <span>高校赛区：</span>
+      <span class="consa gaoxiao" data-toggle="distpicker1">
+        <select class="form-control" name="" id="province2" class=""></select>
+        <select class="form-control" name="" id="" class=""></select>
+        <select class="form-control college_division" name="college_division" id=""></select>
+      </span>
+      <i></i>
+    </div>
+		<div class="logpawd logname">
+			<span>自媒体账号：</span>
+			<input type="text" class="pwds" name="media" placeholder="抖音号、微信公众号、头条号等" />
+			<i style="opacity: 0;"></i>
+		</div>
+		<div class="logpawd logname">
+			<span>自媒体粉丝数：</span>
+			<input type="text" class="pwds" name="media_fans" placeholder="自媒体粉丝数" maxlength="9" />
+			<i style="opacity: 0;"></i>
+		</div>
+		<div class="logpawd logname gasxa">
+			<span>是否愿意参加红人培训：</span>
+			<select name="is_training" class="is_training">
+				<option value="">——请选择——</option>
+				<option value="是">是</option>
+				<option value="否">否</option>
+			</select>
+			<i></i>
+		</div>
+		
+		<div class="logpawd logname gasxa">
+			<span>上传照片(1M以内)：</span>
+			<a class="uplod">
+				<p class="lecos">
+					<img src="__IMG__/uplode.png" class="uplods avatar" onclick="upAvatar();"/>
+          <input type="hidden" name="avatar" value="">
+          <input type="file" id="up-avatar" style="display: none" />
+					<i class="xxcont"></i>
+				</p>
+				<div class="recos">
+					<p>点击关注</p>
+					<p>海选最新消息 </p>
+					<p>官方发布平台</p>
+				</div>
+			</a>
+			<i style="opacity: 0;"></i>
+		</div>
+		
+		<div class="loginbtn submit">提交</div>
+	</div>
+	
+   <!--弹窗-->
+   <div class="zwbox" style="display: block;">
+       <div class="xzconts">
+       	    <div class="xzhead">{$art['title']}</div>
+       	    <div class="xzobx">
+       	    	{$art['content']}
+       	    </div>
+       	    <div class="tcbtn">
+       	    	<button class="lebut">同意</button>
+       	    	<button class="rgbut">拒绝</button>
+       	    </div>
+       </div>
+   </div>
+
+   <!--确认报名-->
+   <div class="bmbox" style="display: none;">
+   	    <div class="bmulbox">
+   	        <div class="bmconts">
+           	  	<div class="bmconli">
+           	  		<span>姓名：</span>
+           	  		<input type="text" value="" class="qr-name" readonly="" />
+           	  	</div>
+                <div class="bmconli">
+                  <span>身份证号：</span>
+                  <input type="text" value="" class="qr-id_num" readonly=""/>
+                </div>
+           	  	<div class="bmconli">
+           	  		<span>手机号码：</span>
+           	  		<input type="text" value="" class="qr-mobile" readonly=""/>
+           	  	</div>
+                <div class="bmconli">
+                  <span>工作单位/学校名称：</span>
+                  <input type="text" value="" class="qr-agency" readonly=""/>
+                </div>
+           	  	<div class="bmconli">
+           	  		<span>邮箱：</span>
+           	  		<input type="text" value="" class="qr-email" readonly=""/>
+           	  	</div>
+           	  	<div class="bmconli">
+           	  		<span>职业：</span>
+           	  		<input type="text" value="" class="qr-profession" readonly=""/>
+           	  	</div>
+           	  	<div class="bmconli">
+           	  		<span>报名类目：</span>
+           	  		<input type="text" value="" class="qr-classes" readonly=""/>
+           	  	</div>
+           	  	<div class="bmconli">
+           	  		<span>赛区：</span>
+           	  		<input type="text" value="" class="qr-division" readonly=""/>
+           	  	</div>
+           	  	<div class="bmconli">
+           	  		<span>自媒体号：</span>
+           	  		<input type="text" value="" class="qr-media" readonly=""/>
+           	  	</div>
+                <div class="bmconli">
+                  <span>自媒体粉丝数：</span>
+                  <input type="text" value="" class="qr-media_fans" readonly=""/>
+                </div>
+           	  	<div class="bmconli">
+           	  		<span>是否愿意红人培训：</span>
+           	  		<input type="text" value="" class="qr-is_training" readonly=""/>
+           	  	</div>
+   	        </div>
+    
+       	    <div class="bmbtns">
+        	   <button class="bmlet">取消</button>
+        	   <button class="bmright sure-submit">确认</button>
+            </div>
+   	    </div>
+    </div>
+
+   <!--扫码关注-->
+   <div class="smbox" style="display: none;">
+   	  <div class="smconts">
+   	  	<div class="closeimg"><img src="__IMG__/close.png"/></div>
+   	  	<div class="gzsam">
+   	  		<img src="__IMG__/index/weibo.jpg" />
+   	  		<p>扫码关注最新海选信息</p>
+   	  	</div>
+   	  </div>
+   </div>
+
+ </block>
+
+<block name="footer-script">
+    <script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js" ></script>
+    <script src="__STATIC__/validform_5.3.2/Validform_v5.3.2_min.js"></script>
+    <script src="__JS__/validform.js"></script>
+    <script src="__JS__/common.js"></script>
+    <script src="__JS__/distpicker.data.js"></script>
+    <script src="__JS__/distpicker.js"></script>
+    <script src="__JS__/distpicker.data1.js"></script>
+    <script src="__JS__/distpicker1.js"></script>
+    <script src="__JS__/main.js"></script>
+    <script src='__JS__/upload.js'></script>
+    <script>
+        function upAvatar()
+        {
+            upload($("#up-avatar"), "{:U('UpDownLoad/upload')}", 'avatar', '');
+        }
+        function afterUpSuccess(data, flag) {
+            $('.avatar').attr('src', data.abs_url);
+            $('.avatar').attr('file-id', data.id);
+            setFileIds($(".avatar"), $("input[name='avatar']"));
+        }
+        function success_callback(){}
+        function error_callback(){}
+    </script>
+
+     <script>
+     	$(function(){
+
+            var type=1,name,id_num,mobile,agency,email,profession,classes,password,re_password,province_name,
+            city_name,area_name,college_division,media,media_fans,is_training,avatar;
+
+            $(".submit").click(function(){
+                name             = $('input[name="name"]').val();
+                id_num           = $('input[name="id_num"]').val();
+                mobile           = $('input[name="mobile"]').val();
+                agency           = $('input[name="agency"]').val();
+                email            = $('input[name="email"]').val();
+                profession       = $('.profession option:selected').val();//$('input[name="profession"]').val();
+                classes          = $('.classes option:selected').val();
+                password         = $('input[name="password"]').val();
+                re_password      = $('input[name="re_password"]').val();
+                province_name    = $('#province1 option:selected').val();
+                city_name        = $('#city1 option:selected').val();
+                area_name        = $('#district1 option:selected').val();
+                college_division = $('.college_division option:selected').val();
+                media            = $('input[name="media"]').val();
+                media_fans       = $('input[name="media_fans"]').val();
+                is_training      = $('.is_training option:selected').val();
+                avatar           = $('input[name="avatar"]').val();
+
+                if (name == '') {
+                  showPop('请输入您的姓名！', 'error', 1500, ''); return;
+                }
+                if (id_num == '') {
+                  showPop('请输入身份证号！', 'error', 1500, ''); return;
+                }
+                if (mobile == '') {
+                  showPop('请输入手机号码！', 'error', 1500, ''); return;
+                }
+                if (agency == '') {
+                  showPop('请输入工作单位/学校名称！', 'error', 1500, ''); return;
+                }
+                // if (email == '') {
+                //   showPop('请输入邮箱地址！', 'error', 1500, ''); return;
+                // }
+                if (profession == '') {
+                  showPop('请选择您的职业！', 'error', 1500, ''); return;
+                }
+                if (classes == '') {
+                  showPop('请选择报名的类目！', 'error', 1500, ''); return;
+                }
+                if (password == '') {
+                  showPop('请输入登录密码！', 'error', 1500, ''); return;
+                }
+                if (re_password == '') {
+                  showPop('请输入确认密码！', 'error', 1500, ''); return;
+                }
+                if (password != re_password) {
+                  showPop('登录密码和确认密码不一致！', 'error', 1500, ''); return;
+                }
+                if ((province_name == '' || city_name == '') && college_division == '') {
+                  showPop('请选择赛区！', 'error', 1500, ''); return;
+                }
+
+                if (is_training == '') {
+                  showPop('是否参见红人培训！', 'error', 1500, ''); return;
+                }
+                if (avatar == '') {
+                  showPop('请上传您的照片！', 'error', 1500, ''); return;
+                }
+
+                if (college_division != '') {
+                  division = college_division;
+                } else {
+                  division = province_name+city_name+area_name;
+                }
+
+                $('.qr-name').val(name);
+                $('.qr-id_num').val(id_num);
+                $('.qr-mobile').val(mobile);
+                $('.qr-agency').val(agency);
+                $('.qr-email').val(email);
+                $('.qr-profession').val(profession);
+                $('.qr-classes').val(classes);
+                $('.qr-division').val(division);
+                $('.qr-media').val(media);
+                $('.qr-media_fans').val(media_fans);
+                $('.qr-is_training').val(is_training);
+
+                $('.bmbox').show();
+            });
+
+            $(".bmright").click(function(){
+                $.post('{:U("UserProfile/add")}',{type:type,name:name,id_num:id_num,mobile:mobile,agency:agency,email:email,profession:profession,classes:classes,
+                  division:division,media:media,media_fans:media_fans,is_training:is_training,avatar:avatar,password:password,re_password:re_password}).success(function(data) {
+                  if (data.status == 1) {
+                      window.location.href='{:U("UserProfile/center")}';
+                  } else {
+                      showPop(data.info, 'error', 1500, ''); return;
+                  }
+                });
+            });
+
+            $('#province1').change(function(){
+              if($(this).val() == '') {
+                //$('.college_division').attr('disabled', false);
+                $('.gaoxiao').find('.form-control').attr('disabled', false);
+              } else {
+                //$('.college_division').attr('disabled', true);
+                $('.gaoxiao').find('.form-control').attr('disabled', true);
+              }
+            })
+
+            $('#province2').change(function(){
+              if($(this).val() == '') {
+                $('#province1').attr('disabled', false);
+                $('#city1').attr('disabled', false);
+                $('#district1').attr('disabled', false);
+              } else {
+                $('#province1').attr('disabled', true);
+                $('#city1').attr('disabled', true);
+                $('#district1').attr('disabled', true);
+              }
+            })
+
+            // 同意拒绝
+         		$(".lebut").click(function(){
+         			$('.zwbox').hide();
+         		})
+         		$(".rgbut").click(function(){
+         			window.location.href="/";
+         		})
+     
+            // 内容取消
+         		$(".bmlet").click(function(){
+         			$(".bmbox").hide()
+         		})
+
+            $(".recos").click(function(){
+              $(".smbox").show();
+            })
+         		$(".closeimg").click(function(){
+         			$(".smbox").hide();
+         		})
+
+            $("#city1").change(function(){
+              if($('#district1 option:eq(1)').val()==undefined){
+                $("#district1").hide();
+              }else{
+                $("#district1").show();
+              }
+            })
+     	  })
+     </script>
+</block>

@@ -1,0 +1,59 @@
+<extend name="Public/base" />
+
+<block name="main">
+    <div class="row-fluid main-row-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+                <!--<div class="widget-title">
+                    <span class="icon">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                    <h5>更新信息</h5>
+                </div>-->
+                <br>
+                <div class="widget-content no-padding">
+                    <form class="form-horizontal text-height-27-form" method="post" action="{:U('Material/update')}">
+                        <input type="hidden" name="model" value="Material">
+                        <input type="hidden" name="id" value="{$row['id']}">
+                        <div class="control-group">
+                            <label class="control-label">栏目</label>
+                            <div class="controls">
+                                <div class="btn-group">
+                                    <button type="button" class="btn checked" data-default="--选择栏目--"></button>
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <volist name="lanmu" id="lm">
+                                            <li data-value="{$key}" data-title="{$lm}" <eq name="key" value="$row['cate']">class="selected"</eq>>
+                                                <a href="javascript:void(0)">{$lm}</a>
+                                            </li>
+                                        </volist>
+                                    </ul>
+                                </div>
+                                <input type="hidden" name="cate" value="{$row['cate']}">
+                                <span class="help-block">* 必选项</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">素材图</label>
+                            <div class="controls">
+                                {:hook('upload',array('is_first'=>1,'unique_sign'=>'pc_show','field_name'=>'pc_show','field_value'=>$row['pc_show'],'save_path'=>'Article'))}
+                                <span class="help-block">* </span>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" onclick="javascript:history.back(-1);return false;">返 回</button>　
+                            <button class="btn btn-info ajax-post" target-form="form-horizontal" type="submit">保 存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+
+</block>

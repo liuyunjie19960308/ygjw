@@ -1,0 +1,72 @@
+<extend name="Public/base" />
+
+<block name="main">
+
+    <div class="row-fluid main-row-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+
+                <div class="widget-title widget-title-search list-widget-title">
+                    <button class="btn btn-success href" url="{:U('Trainees/add')}" target-form="ids">新增</button>&nbsp;
+                    <button class="btn btn-inverse ajax-post" url="{:U('Trainees/forbidResume',array('model'=>'Trainees','field'=>'status','value'=>0))}" target-form="ids">禁用</button>&nbsp;
+                    <button class="btn btn-info ajax-post" url="{:U('Trainees/forbidResume',array('model'=>'Trainees','field'=>'status','value'=>1))}" target-form="ids">启用</button>&nbsp;
+                    <button class="btn btn-danger confirm ajax-post" url="{:U('Trainees/delete',array('model'=>'Trainees'))}" target-form="ids">删除</button>&nbsp;
+                </div>
+
+                <div class="widget-content no-padding no-border">
+                    <table class="table table-bordered table-striped with-check reset-checkbox">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" id="title-checkbox" name="title-checkbox" class="check-all"/><!--<i class="icon-resize-vertical"></i>--></th>
+                            <th>ID</th>
+                            <th>学员</th>
+                            <th>简介</th>
+                            <!-- <th>赛区</th>
+                            <th>荣誉</th> -->
+                            <th><i class="fa fa-pencil"></i>排序</th>
+                            <th>最后更新时间</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+                        <empty name="list"><tr><td colspan="30">Aho！没有查询结果！！</td></tr></empty>
+                        <volist name="list" id="row">
+                            <tr>
+                                <td><input type="checkbox" name="ids[]" value="{$row['id']}" class="ids"/></td>
+                                <td>{$row['id']}</td>
+                                <td>
+                                    <img src="{$row['show_cover'][0]['abs_url']}" style="width: 80px;">
+                                    {$row['name']}
+                                </td>
+                                <td>{$row['short_desc']}</td>
+                                <!-- <td>{$row['division']}</td>
+                                <td>{$row['honor']}</td> -->
+                                <td class="quick-edit" data-model="Trainees" data-id="{$row['id']}" data-field="sort">{$row['sort']}</td>
+                                <td>{$row['update_time']|timestamp2date}</td>
+                                <td>{$row['status']|get_status_title}</td>
+                                <td>
+                                    <a href="{:U('Trainees/update',array('id'=>$row['id']))}" title="编辑" class="">
+                                        <span class="label label-success label-success-hover">编辑</span></a>&nbsp;
+                                    <if condition="$row['status'] eq 0 or $row['status'] eq 1">
+                                        <a href="{:U('Trainees/forbidResume',array('model'=>'Trainees','ids'=>$row['id'],'field'=>'status','value'=>abs(1-$row['status'])))}" title="{$row['status']|show_status_name}" class="ajax-get">
+                                            <span class="label {$row['status']|show_status_label}">{$row['status']|show_status_name}</span></a>&nbsp;
+                                    </if>
+                                    <a href="{:U('Trainees/delete',array('model'=>'Trainees','ids'=>$row['id']))}" title="删除" class="confirm ajax-get">
+                                        <span class="label label-important label-important-hover">删除</span></a>
+                                </td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination alternate">
+                    {$page}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</block>

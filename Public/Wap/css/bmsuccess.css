@@ -1,0 +1,68 @@
+	html{
+		background: -moz-linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+	    background: -webkit-linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+	    background: -o-linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+	    background: -ms-linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+		background:linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+		position: relative;
+		min-height: 100%;		
+	}
+	
+	.subox{
+		padding: 0.6rem 0.4rem;
+		text-align: center;
+	}
+	.tiohea{
+		font-size: 0.4rem;
+		color: white;
+	}
+	.oansa{
+		margin: 0.2rem 0;
+		font-size: 0.4rem;
+		color: white;
+	} 
+	.touxiang{
+		width: 3.23rem;
+		height: 3.23rem;
+		border-radius: 50%;
+		margin: 0.4rem 0;
+	}
+	.quconts{
+		padding: 0 0.16rem;
+	}
+	.qicosli{
+		height: 0.77rem;
+		border-bottom: 1px dotted #FFFFFF;
+		padding: 0 0.3rem;
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+	.qicosli span{
+		width: 1.8rem;
+		display: inline-block;
+		margin-right: 0.1rem;
+		color: #FFFFFF;
+		font-size: 0.3rem;
+		text-align: left;
+	}
+	.qicosli input{
+		width: 3.8rem;
+		color: white;
+		font-size: 0.3rem;
+	}
+	.bmtxt{
+		margin-top: 0.9rem;
+		text-align: center;
+		font-size: 0.3rem;
+		color: white;
+		line-height: 0.4rem;
+	}
+	.smconta{
+		margin-top: 0.4rem;
+	}
+	.smconta p{
+		margin-bottom: 0.28rem;
+		font-size: 0.32rem;
+		color: white;
+	}

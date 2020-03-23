@@ -1,0 +1,112 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+	<link rel="stylesheet" href="__CSS__/index.css" />
+	<link rel="stylesheet" href="__CSS__/xiansdel.css" />
+	<!--封装好的视频布局样式-->
+<link rel="stylesheet" href="__STATIC__/video/css/jsmodern.min.css">
+<style>
+#video {
+	width: 1190px;
+	height: 694px;
+	margin: 50px auto;
+	position: relative;
+}
+
+#video video {
+	width: 100%;
+	height: 100%;
+	/*object-fit: fill;*/
+}
+
+.VideoBtn {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	display: block;
+	width: 70px;
+	height: 70px;
+	margin-left: -35px;
+	margin-top: -35px;
+	cursor: pointer;
+	z-index: 10;
+}
+</style>
+</block>
+
+<block name="content">
+			
+	<div class="delxs">
+		<div class="headxs">
+			<a href="/"><<返回首页</a>
+		</div>
+		<div class="conhead">
+			<div class="xsname">{$art['title']}</div>
+			<div class="miaos">
+				<span>编辑：中国好诗歌全国海选组委会</span>
+				<a>发布时间：{$art['create_time'],'Y-m-d'|timestamp2date}</a>
+			</div>
+		</div>
+		
+		<if condition="empty($art['video_url'])">
+			<div style="margin: 30px auto">
+				{$art['content']}
+			</div>
+		</if>
+		<if condition="!empty($art['video_url'])">
+			<div id="video">
+				<!-- https://blz-videos.nosdn.127.net/1/OverWatch/AnimatedShots/Overwatch_AnimatedShot_Soldier76_Hero.mp4 -->
+				<video src="{$art['video_url']}" id="videoShow"></video>
+				<span class="VideoBtn"><img src="__STATIC__/video/images/bo1.png"></span>
+			</div>
+		</if>
+	</div>
+</block>
+<block name="footer-script">
+	<script src="__STATIC__/video/js/jquery.min.js"></script>
+
+<!--mp4视频插件-->
+<script src="__STATIC__/video/js/jsmodern.min.js"></script>
+	<!--视频插件调用方法-->
+<script>
+$(function () {
+	//视频
+	jsModern.video("#video");
+	//播放视频
+	$(".VideoBtn").click(function () {
+		var video = document.getElementById("videoShow");
+		video.play();
+		$('.VideoBtn').hide();
+	})
+	//监听视频的播放状态
+	var video = document.getElementById("videoShow");
+	video.oncanplay = function () {
+		$(".VideoBtn").show();
+		//$("#video").attr("poster","");
+	}
+	//视频播放事件
+	video.onplay = function () {
+		$("#videoShow").attr("poster", "");
+		$(".VideoBtn").hide();
+	};
+	video.onplaying = function () {
+		$(".VideoBtn").hide();
+	};
+
+	//视频暂停事件
+	video.onpause = function () {
+		$(".VideoBtn").show();
+	};
+	//点击视频周围暂停播放图片出现
+	video.onclick = function () {
+		if (video.paused) {
+			$(".VideoBtn").hide();
+			video.play();
+		} else {
+			$(".VideoBtn").show();
+			video.pause();
+		}
+	};
+})
+</script>
+</block>

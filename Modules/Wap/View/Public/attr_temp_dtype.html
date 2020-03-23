@@ -1,0 +1,29 @@
+<!-- 选择设计类型 -->
+<style type="text/css">
+    .dtype-pop {width: 100%;height: 100%;position: fixed;display: none;top: 0;background: rgba(0, 0, 0, .7);z-index: 999;}
+    .pop-data {width: 90%;max-height: 1000px; overflow-y: scroll; background: #fff;margin-left: -441px;text-align: left;line-height: 130px;position: absolute;top: 50%;left: 50%;z-index: 99;border-radius: 30px;}
+    .juzhong1 {margin-top: -365px;}
+    .pop-data>h2 {width: 100%;height: 130px;background: #FFC90C;text-align: center;border-radius: 30px 30px 0 0;}
+    .pop-data>li {width: 100%;height: 110px;padding: 0 30px;border-bottom: 1px solid #ddd;border-radius: 30px;}
+</style>
+<div class="dtype-pop">
+    <ul class="pop-data juzhong1">
+        <h2>请选择设计类型</h2>
+        <!-- <li>
+            <text>全部行业</text>
+        </li> -->
+        <volist name="dtype_list" id="dtype">
+            <li data-id="{$dtype['attr_id']}" onclick="selectDtype(this)">
+                <text>{$dtype['attr_value']}</text>
+            </li>
+        </volist>
+    </ul>
+</div>
+<script>
+    function dtypePopShow() {
+        $('.dtype-pop').show()
+    }
+    $('.dtype-pop').click(function(e){
+        $(this).hide();
+    });
+</script>

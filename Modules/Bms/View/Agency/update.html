@@ -1,0 +1,53 @@
+<extend name="Public/base" />
+
+<block name="main">
+    <div class="row-fluid main-row-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+                <!--<div class="widget-title">
+                    <span class="icon">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                    <h5>更新信息</h5>
+                </div>-->
+                <br>
+                <div class="widget-content no-padding">
+                    <form class="form-horizontal text-height-27-form" method="post" action="{:U('Agency/update')}">
+                        <input type="hidden" name="model" value="Agency">
+                        <input type="hidden" name="id" value="{$row['id']}">
+                        <div class="control-group">
+                            <label class="control-label">名称</label>
+                            <div class="controls">
+                                <input type="text" name="title" value="{$row['title']}" class="text-width-30" maxlength="30">
+                                <span class="help-block">* 赛区名称</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">单位</label>
+                            <div class="controls">
+                                <input type="text" name="agency" value="{$row['agency']}" class="text-width-30" maxlength="30">
+                                <span class="help-block">* 承办单位</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">电话</label>
+                            <div class="controls">
+                                <input type="text" name="tel" value="{$row['tel']}" class="text-width-30" maxlength="11">
+                                <span class="help-block">* 咨询电话</span>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" onclick="javascript:history.back(-1);return false;">返 回</button>　
+                            <button class="btn btn-info ajax-post" target-form="form-horizontal" type="submit">保 存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+
+</block>

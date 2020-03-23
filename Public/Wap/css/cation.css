@@ -1,0 +1,49 @@
+.bmdata{
+		margin-top: 1.2rem;
+	}
+	.btext{
+		position: relative;
+		margin-bottom: 1.5rem;
+	}
+	.logina {position: absolute;
+	right: 0;
+	top: 0.5rem;
+	
+	}
+	.logina i{
+		font-size: 0.3rem;
+		color: white;
+		margin-right: 0.2rem;
+	}
+	.logina a{
+		font-size: 0.3rem;
+		color: #FFE071;
+	}
+	.datainput textarea{
+		width: 4.55rem;
+		height: 2.06rem;
+		padding: 0.2rem;
+		box-sizing: border-box;
+		border:none;
+		border-radius: 0.1rem;
+		outline: none;
+		background: white;
+	}
+	
+	.lvlia span{
+		margin-top: -1.3rem;
+	}
+	.lvlicont{
+		height: 2.06rem !important;
+		border-radius: 0.1rem;
+	}
+	.tjcont{
+			margin-top: 0.5rem !important;
+			text-align: center;
+			margin: auto;
+		}
+		.tjcont p{
+			font-size: 0.42rem;
+			color: white;
+			line-height: 0.6rem;
+		}

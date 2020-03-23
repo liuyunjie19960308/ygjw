@@ -1,0 +1,63 @@
+li{ list-style:none; cursor:pointer; }
+.selection-container{ height:250px; margin:10px; }
+.select-box{ width:250px; height:100%; border:1px solid #ccc; float:left;overflow-y: scroll;}
+.arrows-box{width:50px;height:100%;float:left;position:relative;}
+.select-content{width:100%;height:320px;overflow-y:auto;overflow-x:hidden;}
+.select-box-title{width:90%;height:30px;line-height:30px;font-size:12px;font-family:"微软雅黑";padding:0 5%;border-bottom:1px solid #ccc;}
+.select-box-title input{margin:8px 0;}
+.checkbox-all{float:right;}
+.checkboxs{vertical-align:middle;}
+.unselect-ul{padding:10px 0;}
+.select-content li{ padding:5px 15px; font-size:12px; font-family:"微软雅黑";}
+.arrow-btns{ width:100%; height:90px; position:absolute; top:50%; margin-top:-45px;}
+.arrow-btn{ width:20px; height:12px; padding:18px 10px;background:#eee; border:1px solid #ccc; margin:0 auto 5px; cursor:pointer;}
+.arrow-btn i{display:inline-block;width:100%;height:100%;background:url("./img/arrow-left.png") no-repeat center center;}
+.arrow-btn.right i{ background:url("./img/arrow-right.png") no-repeat center center;}
+
+<div class="selection-container">
+                                        <div class="select-box left">
+                                            <div class="select-box-title">未选择 - 告警规则<!-- <input type="checkbox" class="checkbox-all" /> --></div>
+                                            <div class="select-content">
+                                                <ul class="unselect-ul">
+                                                    <li class="left" onclick="arrow(this)">
+                                                        <span>磁盘使用率普通告警</span>
+                                                    </li>
+                                                    <li class="left" onclick="arrow(this)">
+                                                        <span>磁盘使用率严重告警</span>
+                                                    </li>
+                                                    <li class="left" onclick="arrow(this)">
+                                                        <span>内存使用率普通告警</span>
+                                                    </li>
+                                                    <li class="left" onclick="arrow(this)">
+                                                        <span>内存使用率严重告警</span>
+                                                    </li>
+                                                    <li class="left" onclick="arrow(this)">
+                                                        <span>CPU使用率普通告警</span>
+                                                    </li>
+                                                    <li class="left" onclick="arrow(this)">
+                                                        <span>CPU使用率严重告警</span>
+                                                    </li>
+                                                    <li class="left" onclick="arrow(this)">
+                                                        <span>设备故障告警</span>
+                                                    </li>
+                                                    <li class="left" onclick="arrow(this)">
+                                                        <span>维护到期告警</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="arrows-box">
+                                            <div class="arrow-btns">
+                                                <div class="arrow-btn right"><i></i></div>
+                                                <div class="arrow-btn left"><i></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="select-box right">
+                                            <div class="select-box-title">已选择 - 告警规则<!-- <input type="checkbox" class="checkbox-all" /> --></div>
+                                            <div class="select-content">
+                                                <ul class="selected-ul">
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>

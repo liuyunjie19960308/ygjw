@@ -1,0 +1,41 @@
+<extend name="Public/base" />
+
+<block name="style">
+    <link rel="stylesheet" href="__CSS__/logoba/6-1-1my.css">
+</block>
+
+<block name="content">
+
+    <div class="myxinix">
+        <div class="img"><img src="{$info['avatar_path']}" alt="" class="circle"></div>
+        <div class="mingz"><p>{$info['nickname']}</p></div>
+    </div>
+    <div class="cont">
+        <div class="sheji_dingdan">
+            <p class="jump_sheji">
+                <img src="__IMG__/logoba/sheji.png" alt="">
+                <text>设计订单</text>
+                <span><img src="__IMG__/logoba/gengduo-1.png" alt=""></span>
+            </p>
+        </div>
+        <div class="shangbiao_dingdan">
+            <p class="jump_zhuce">
+                <img src="__IMG__/logoba/shangbiaozhuce.png" alt="">
+                <text>商标订单</text>
+                <span><img src="__IMG__/logoba/gengduo-1.png" alt=""></span>
+            </p>
+        </div>
+        <div class="myquanbao">
+            <p class="jump_quanbao">
+                <img src="__IMG__/logoba/youhuiquan.png" alt="">
+                <text>我的券包</text>
+                <span><img src="__IMG__/logoba/gengduo-1.png" alt=""></span>
+            </p>
+        </div>
+        <button type="button" class="logout">退出</button>
+    </div>
+</block>
+
+<block name="script">
+    <script src="__JS__/logoba/my.js" type="text/javascript" charset="utf-8"></script>
+</block>

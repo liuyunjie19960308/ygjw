@@ -1,0 +1,29 @@
+<!-- 选择行业 -->
+<style type="text/css">
+    .industry-pop {width: 100%;height: 100%;position: fixed;display: none;top: 0;background: rgba(0, 0, 0, .7);z-index: 999;}
+    .pop-data {width: 90%;max-height: 1000px; overflow-y: scroll; background: #fff;margin-left: -441px;text-align: left;line-height: 130px;position: absolute;top: 50%;left: 50%;z-index: 99;border-radius: 30px;}
+    .juzhong1 {margin-top: -365px;}
+    .pop-data>h2 {width: 100%;height: 130px;background: #FFC90C;text-align: center;border-radius: 30px 30px 0 0;}
+    .pop-data>li {width: 100%;height: 110px;padding: 0 30px;border-bottom: 1px solid #ddd;border-radius: 30px;}
+</style>
+<div class="industry-pop">
+    <ul class="pop-data juzhong1">
+        <h2>请选择所属行业</h2>
+        <li data-id="0" onclick="selectIndustry(this)">
+            <text>全部行业</text>
+        </li>
+        <volist name="industry_list" id="industry">
+            <li data-id="{$industry['attr_id']}" onclick="selectIndustry(this)">
+                <text>{$industry['attr_value']}</text>
+            </li>
+        </volist>
+    </ul>
+</div>
+<script>
+    function industryPopShow() {
+        $('.industry-pop').show()
+    }
+    $('.industry-pop').click(function(e){
+        $(this).hide();
+    });
+</script>

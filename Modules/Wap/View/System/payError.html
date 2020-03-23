@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>支付失败</title>
+    <style type="text/css">
+        body{margin: 0;padding: 0;font-family: 微软雅黑;font-size: 0.14rem;}
+        a{text-decoration: none;color:#000;}
+        p{margin: 0;}
+        img{border:0;display:block;}
+        ul{padding: 0;margin: 0;list-style: none;}
+        ul:after{content: "";display:block;clear: both;}
+        /**********大致兼容pc************/
+        @media screen and (min-width: 750px) {body{width:750px; margin: auto;}}
+        .tennt{position: absolute;top:0;height: 100%;width: 100%;display: flex;flex-direction: column;justify-content: center;}
+        .zfsb>p{display: flex;justify-content: center;}
+        .zfsb>p img{width: 170px;height: 110px;}
+        .zfsb>div{text-align: center;}
+        .zfsb_z{margin-top: 20px;color: #F21700;font-weight: bold;font-size: 0.20rem;}
+        .fhsy{margin-top: 50px;}
+        .fhsy a{border: 1px solid #E0100B;padding: 10px 40px;border-radius: 5px;color: #F21700;font-size: 0.16rem;}
+    </style>
+</head>
+<body>
+<div class="tennt">
+    <div class="zfsb">
+        <p>
+            <img src="__IMG__/logoba/zfimg_error.png" alt="">
+        </p>
+        <div class="zfsb_z">
+            支付失败
+            <p>{$_REQUEST['msg']}</p>
+        </div>
+        <div class="fhsy">
+            <a href="/">
+                返回首页
+            </a>
+        </div>
+        <div class="fhsy">
+            <a href="javascript:void(0)" onclick="javascript:history.back(-1);return false;">
+                重新支付
+            </a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    (function (doc, win) {
+    // 分辨率Resolution适配
+    var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if (clientWidth >= 750) {
+                docEl.style.fontSize = 100 + 'px';
+            }else{docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';}
+        }
+    // Abort if browser does not support addEventListener
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    recalc();
+})(document, window);
+</script>
+</body>
+</html>

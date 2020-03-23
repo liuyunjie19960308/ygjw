@@ -1,0 +1,41 @@
+.siupbox{
+		padding: 0.48rem 0;
+		text-align: center;
+		background: -moz-linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+	    background: -webkit-linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+	    background: -o-linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+	    background: -ms-linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+		background:linear-gradient(0deg,rgba(85,12,15,1),rgba(229,157,114,1),rgba(200,86,73,1));
+	}
+	.topbox {
+		width: 5.2rem;
+		height: auto;
+		margin: auto;
+	}
+	.topbox img{
+		width: 100%;
+	}
+	.logins {
+		margin-top: 0.48rem;
+		text-align: center;
+	}
+	.logins a{
+	display: block;	
+	width: 5.26rem;
+	margin-bottom: 0.3rem !important;
+	font-size: 0.36rem;
+	background: #FFE071;
+	border-radius: 0.1rem;
+	color: #550C0F;
+	height: 0.8rem;
+	margin: auto;
+	line-height: 0.8rem;
+	}
+	.upimg{
+		width: 5.2rem;
+		margin: auto;
+		margin-top: 1.5rem;
+	}
+	.upimg img{
+		width: 100%;
+	}

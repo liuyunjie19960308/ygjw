@@ -1,0 +1,60 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+    <link rel="stylesheet" href="__CSS__/rem.css" />
+    <link rel="stylesheet" href="__CSS__/bmdel.css" />
+    <link rel="stylesheet" href="__CSS__/xsgscot.css" />
+</block>
+
+<block name="content">
+	<div class="bmwbox">
+		<div class="bmheas">
+			<img src="__IMG__/logo.png" />
+			<p class="bmyear"><a>————</a><span>2020</span><a>————</a></p>
+			<span class="btext">全国海选部分选手公示</span>
+		</div>
+		
+		<div class="xsdata">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>编号</th>
+						<th>姓名</th>
+						<th>赛区</th>
+						<th>报名类目</th>
+					</tr>
+				</thead>
+				<tbody class="scroll-append-box">
+
+				</tbody>
+			</table>
+		</div>
+		
+	</div>
+</block>
+<block name="footer-script">
+<script>
+        var target = '{:U("UserProfile/getMore")}';
+        function getHtml(data) {
+            return '<tr>'+
+						'<th>'+data.sn+'</th>'+
+						'<th>'+data.name+'</th>'+
+						'<th>'+data.division+'</th>'+
+						'<th>'+data.classes+'</th>'+
+					'</tr>';
+        }
+        // 创建ajax data参数
+        function getQuery() {
+            return {p:p};
+        }
+        function noMore()
+        {
+            showPop('无更多数据', 'error', 1500, 'callback');
+        }
+        function error_callback()
+        {}
+    </script>
+    <script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js" ></script>
+    <script type="text/javascript" src="__JS__/scroll.js"></script>
+    <script src="__JS__/common.js"></script>
+</block>

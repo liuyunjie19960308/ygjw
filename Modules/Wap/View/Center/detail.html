@@ -1,0 +1,344 @@
+<extend name="Public/base" />
+<block name="style">
+    <link rel="stylesheet" href="__CSS__/logoba/6-2-1dingdanxiangxi.css">
+    <link rel="stylesheet" href="__CSS__/logoba/6-1-3my_quanbao.css">
+</block>
+
+<block name="content">
+    <div class="box">
+        <div class="cont">
+            <h2 class="zhuangtai"><if condition="$order['status'] eq -1">确认订单<else/>{$order['status_name']}</if></h2>
+            <img class="ditu" src="__IMG__/logoba/xiangqingditu.png" alt="">
+
+            <if condition="!empty($order['logo_name'])">
+                <div class="shejixuqiu weixianshi">
+                    <h2>设计需求</h2>
+                    <ul>
+                        <li><span>标志/品牌名称</span><p>{$order['logo_name']}</p></li>
+                        <li><span>行业类型</span><p>{$order['industry']}</p></li>
+                        <li><span>品牌介绍</span><p>{$order['introduce']|default="---"}</p></li>
+                        <li><span>设计建议</span><p>{$order['advice']|default="---"}</p></li>
+                        <li><span>设计风格</span><p>{$order['style']|default="---"}</p></li>
+                        <li><span>设计类型</span><p>{$order['dtype']|default="---"}</p></li>
+                        <li><span>LOGO颜色</span><p>{$order['color']|default="---"}</p></li>
+                        <li><span>是否注册商标</span><p><if condition="$order['mark_append_amounts'] neq 0.0">是<else/>---</if></p></li>
+                        <if condition="!empty($order['refer_pic'])">
+                            <li>
+                                <span>参考图片</span>
+                                <p>
+                                    <volist name="order['refer_pic']" id="refer_pic">
+                                        <img src="{$refer_pic['oss_request_url']}" alt="">
+                                    </volist>
+                                </p>
+                            </li>
+                        </if>
+                        <!-- <li>
+                            <span>我的想法</span><p>设计的要好看，而且要符合餐 饮行业和我们的企业名称。</p>
+                        </li> -->
+                    </ul>
+                    <img class="shang" src="__IMG__/logoba/xiala-kaobei.png" alt="">
+                    <div class="mengceng">
+                        <img class="bg" src="__IMG__/logoba/bantouming.png" alt="" onclick="">
+                        <img class="xia" src="__IMG__/logoba/xiala-1.png" alt="">
+                    </div>
+                </div>
+                <div class="taocan">
+                    <li>
+                        <h2>{$order['service_list']['logo']['service_name']}
+                            <span>￥{$order['service_list']['logo']['price']}</span>
+                        </h2>
+                        <div class="clear"></div>
+                        <if condition="$order['mark_append_amounts'] neq 0.0">
+                        <h2>注册商标设计费加价
+                            <span>￥{$order['mark_append_amounts']}</span>
+                        </h2>
+                        <div class="clear"></div>
+                        </if>
+                        <if condition="$order['dtype_amounts'] != 0.0">
+                        <h2>卡通形象设计类型加价
+                            <span>￥{$order['dtype_amounts']}</span>
+                        </h2>
+                        </if>
+                    </li>
+                    <if condition="$order['status'] eq 1">
+                        <p>LOGO稿设计中...</p>
+                        <ul>
+                            <empty name="order['service_list']['logo']['dps']">
+                                <li><img src="__IMG__/logoba/tuyi-1.png" alt=""></li>
+                            </empty>
+                            <volist name="order['service_list']['logo']['dps']" id="dp">
+                                <li onclick="dpsShow(this)" data-id="{$dp['id']}" data-best="{$dp['best']}" data-soso="{$dp['soso']}" data-bad="{$dp['bad']}">
+                                    <img src="{$dp['oss_request_url']}" alt="">
+                                </li>
+                            </volist>
+                            <!-- <li class="none"><img src="__IMG__/logoba/tuyi-1.png" alt=""></li> -->
+                        </ul>
+                        <notempty name="order['service_list']['logo']['dps']">
+                            <p class="share">分享到朋友圈让朋友帮您提意见<span onclick="showCopy(this)"><img src="__IMG__/logoba/shouzhi(1).png" alt="">点击转发</span></p>
+                        </notempty>
+                    </if>
+                </div>
+            </if>
+
+            <if condition="!empty($order['service_list']['graphic'])">
+                <div class="visheji">
+                    <volist name="order['service_list']['graphic']" id="graphic_service">
+                        <li>
+                            <h2>{$graphic_service['service_name']}
+                                <span class="xiala"><img src="__IMG__/logoba/zhiding.png" alt=""></span>
+                                <span class="graphic-price">￥{$graphic_service['detail_total']}</span>
+                            </h2>
+                        </li>
+                        <if condition="$order['status'] neq 1">
+                            <ul class="graphic-detail">
+                                <volist name="graphic_service['details']" id="detail">
+                                    <volist name="detail['attr_values']" id="attr">
+                                        <li>
+                                            <span>{$attr['attr_value']}</span><p>￥{$attr['attr_price']}</p>
+                                        </li>
+                                    </volist>
+                                </volist>
+                            </ul>
+                        </if>
+                        <if condition="$order['status'] eq 1">
+                            <small>注：配套VI将在logo设计后完成</small>
+                            <ul class="graphic-gaojian">
+                                <volist name="graphic_service['details']" id="detail">
+                                    <volist name="detail['attr_values']" id="attr">
+                                        <li>
+                                            <empty name="attr['dps']">
+                                                <img src="__IMG__/logoba/tuyi-1.png" alt="">
+                                            </empty>
+                                            <notempty name="attr['dps']">
+                                                <img src="{$attr['dps'][0]['oss_request_url']}" alt="">
+                                            </notempty>
+                                            <p>{$attr['attr_value']}</p>
+                                        </li>
+                                    </volist>
+                                </volist>
+                            </ul>
+                        </if>
+                    </volist>
+                </div>
+            </if>
+
+            <if condition="!empty($order['service_list']['mark'])">
+                <div class="visheji">
+                    <li>
+                        <h2>商标注册
+                            <span class="xiala" style="left: 170px"><img src="__IMG__/logoba/zhiding.png" alt=""></span>
+                            <span class="graphic-price">￥{$order['service_list']['mark']['detail_total']}</span>
+                        </h2>
+                    </li>
+                    <ul class="graphic-detail">
+                        <volist name="order['service_list']['mark']['details']" id="detail">
+                            <volist name="detail['attr_values']" id="attr">
+                                <li>
+                                    <span>{$attr['attr_value']}</span><p>￥{$attr['attr_price']}</p>
+                                </li>
+                            </volist>
+                        </volist>
+                    </ul>
+                </div>
+            </if>
+
+            <div class="heji">
+                <ul>
+                    <li>
+                        <span>合计金额</span><p>￥{$order['order_amounts']}</p>
+                    </li>
+                    <if condition="$order['status'] eq -1 or $order['status'] eq 0">
+                        <li>
+                            <span>优惠券</span>
+                            <p onclick="showCoupon(this)">
+                                <span class="coupon-info">{:count($coupon_list)}张优惠券</span>
+                                <span class="more-icon"><img src="__IMG__/logoba/gengduo-2.png" alt=""></span>
+                            </p>
+                        </li>
+                    <else/>
+                        <if condition="$order['coupon_amounts'] neq '0.0'">
+                            <li>
+                                <span>优惠券</span>
+                                <p>
+                                    <span>-￥{$order['coupon_amounts']}</span>
+                                </p>
+                            </li>
+                        </if>
+                    </if>
+                    <if condition="$order['status'] gt -1">
+                        <li>
+                            <span>订单编号</span><p>{$order['order_sn']}<span></span></p>
+                        </li>
+                        <li>
+                            <span>下单时间</span><p>{$order['create_time']}<span></span></p>
+                        </li>
+                    </if>
+                </ul>
+            </div>
+
+            <if condition="$order['status'] eq -1">
+            <div class="protocol" style="padding:10px 0 0 40px;">
+                <input type="checkbox" name="protocol" id="protocol" style="width:30px;height:30px;">&nbsp;同意<a href="{:U('Article/art',['flag'=>'orderp'])}" target="_blank" style="color: #FFC90C;">《服务协议》</a>
+            </div>
+            <else/>
+                <input type="checkbox" name="protocol" id="protocol" style="display: none;" checked="">
+            </if>
+
+            <div class="qb_fukuan">
+                <h2>实付金额：￥<span class="pay-amounts">{$order['order_amounts'] - $order['coupon_amounts']}</span></h2>
+                <div class="but">
+                    <if condition="$order['status'] eq 0">
+                        <button class="quxiao" type="button" onclick="cancelOrder(this);" data-sn="{$order['order_sn']}" style="background:#dddddd">取消</button>
+                    </if>
+                    <if condition="$order['status'] eq 1">
+                        <button class="quxiao" type="button" onclick="confirmOrder(this);" data-sn="{$order['order_sn']}">确认完成</button>
+                    </if>
+                    <if condition="$order['status'] eq -1 or $order['status'] eq 0">
+                        <button class="fukuan btn-pay" type="button" onclick="payOrder(this)" data-sn="{$order['order_sn']}" data-price="{$order['order_amounts']}">付款</button>
+                    </if>
+                    <if condition="$order['status'] eq 11">
+                        <button class="quxiao" type="button" onclick="delOrder(this);" data-sn="{$order['order_sn']}" style="background:#dddddd">删除订单</button>
+                    </if>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="underlying-bg lyq-coupon-bg"></div>
+    <div class="box enable-coupon-box" style="z-index: 5001;position: fixed;bottom: 0;background-color: #F3F3F3; display: none; height: 800px;overflow-y: scroll;">
+        <volist name="coupon_list" id="coupon">
+            <if condition="$coupon['status'] eq 0">
+                <div class="youhuiquan">
+                    <img src="__IMG__/logoba/keyongquanditu.png" alt="">
+                    <div class="left">
+                        <p><text>￥</text><span>{:intval($coupon['face_value'])}</span></p>
+                        <p>{$coupon['type_name']}</p>
+                    </div>
+                    <div class="right">
+                        <h3>{$coupon['desc']}{$coupon['type_name']}</h3>
+                        <h4><if condition="$coupon['type'] eq 2">满{:intval($coupon['use_condition'])}减{:intval($coupon['face_value'])}</if></h4>
+                        <p>有效期至{$coupon['invalid_date']}</p>
+                        <button type="button" onclick="useCoupon(this)" class="unuse" data-id="{$coupon['u_cpn_id']}" data-price="{:intval($coupon['face_value'])}">确认使用</button>
+                    </div>
+                </div>
+            </if>
+        </volist>
+    </div>
+
+    <include file="Center/pop_dps"/>
+
+</block>
+
+<block name="footer">
+    <div class="underlying-bg lyq-confirm-bg" onclick="hideCopy(this)">
+        <div class="lyq-confirm" style="position:fixed;left:10%;top:30%;display: block;z-index: 5001;background: #fff;width: 800px;border-radius: 20px;padding: 60px 20px 60px 20px;">
+            <p class="copy-content" style="color: #E1353A;font-size: 32px;font-weight: bold;text-align: center;width: 100%;word-wrap: break-word; word-break: normal;">
+                {:C('WRITE1')}<br/>
+                http://m.logoba.com/System/dps/sn/{$order['order_sn_ciphertext']}
+            </p>
+            <p style="color: #666;font-size: 31px;font-weight: bold;text-align: center;width: 100%;word-wrap: break-word; word-break: normal;">
+                复制上面地址到微信群或者朋友圈，收集大家的意见！
+            </p>
+            <div class="confirm-btn" style="margin-top: 60px;text-align: center;">
+                <div class="copy-btn" style="width: 100%;height: 80px;background:linear-gradient(0deg,rgba(246,220,152,1) 0%,rgba(245,239,211,1) 100%);
+                border-radius: 20px;font-size: 35px;color: #E1353A;text-align: center;line-height: 80px;margin: 0 auto;">
+                    点击复制
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="underlying-bg lyq-subscribe-bg">
+        <div class="lyq-subscribe" style="position:fixed;left:10%;top:10%;display: block;z-index: 5001;background: #fff;width: 800px;border-radius: 20px;padding: 60px 20px 60px 20px;">
+            <p style="color: #E1353A;font-size: 32px;font-weight: bold;width: 100%;text-align: center; padding: 0 40px;">
+                请先关注我们的公众号
+            </p> 
+            <p class="" style="width: 100%;">
+                <img src="{$subscribe['code_path']}">
+            </p>
+            <p style="color: #666;font-size: 31px;font-weight: bold;width: 100%;word-wrap: break-word; word-break: normal;padding: 0 40px;">
+                <if condition="CARRIER eq 'browser'">
+                    1、长按二维码保存到手机，然后到微信中点击“扫一扫”，选择从相册选取二维码<br/>
+                <else/>
+                    1、长按识别二维码，关注公众号<br/>
+                </if>
+                2、关注成功后，回到页面进行刷新，再次点击“点击转发”即可获取分享链接
+            </p>
+        </div>
+    </div>
+</block>
+
+<block name="script">
+    <script src="__JS__/logoba/dingdanxaingxi.js" type="text/javascript" charset="utf-8"></script>
+    <script src="__JS__/logoba/order-handle.js"></script>
+    <script type="text/javascript">
+        var order_amounts = {$order['order_amounts']}, u_cpn_id = 0, from = 'detail';
+        // 显示优惠券选择框
+        function showCoupon(o) {
+            if ({:count($coupon_list)} == 0) {
+                return;
+            }
+            $('.lyq-coupon-bg').show();
+            $('.enable-coupon-box').show();
+        }
+        $('.lyq-coupon-bg').click(function(){
+            $('.lyq-coupon-bg').hide();
+            $('.enable-coupon-box').hide();
+        });
+        // 使用优惠券
+        function useCoupon(o) {
+            if ($(o).hasClass('unuse')) { //未选择
+                if (u_cpn_id > 0) {
+                    alert('请先取消已选择的优惠券！'); return;
+                }
+                $(o).html('取消使用');
+                $(o).removeClass('unuse');
+                $(o).addClass('use');
+                $('.coupon-info').html('-￥'+parseFloat($(o).attr('data-price')));
+                $('.pay-amounts').html(order_amounts-parseFloat($(o).attr('data-price')));
+                u_cpn_id = $(o).attr('data-id');
+                $('.btn-pay').attr('data-price', order_amounts-parseFloat($(o).attr('data-price')));
+            } else {
+                $(o).html('确认使用');
+                $(o).removeClass('use');
+                $(o).addClass('unuse');
+                $('.coupon-info').html('{:count($coupon_list)}张优惠券');
+                $('.pay-amounts').html(order_amounts);
+                u_cpn_id = 0;
+                $('.btn-pay').attr('data-price', order_amounts);
+            }
+            $('.lyq-coupon-bg').hide();
+            $('.enable-coupon-box').hide();
+        }
+    </script>
+
+    <script src="__JS__/common.js"></script>
+    <script type="text/javascript" src="http://www.jq22.com/demo/clipboard.js-master201703170013/dist/clipboard.min.js"></script>
+    <script>
+        var subscribe = {$subscribe['subscribe']|default=0};
+        function showCopy(o) {
+            if (subscribe == 0) {
+                $('.lyq-subscribe-bg').show(); return;
+            }
+            $('.lyq-confirm-bg').show();
+        }
+        function hideCopy(o) {
+            $('.lyq-confirm-bg').hide();
+        }
+
+        var content = "{:C('WRITE1')}http://m.logoba.com/System/dps/sn/{$order['order_sn_ciphertext']}";
+        var clipboard = new Clipboard('.copy-btn', {
+            text: function() {
+                return content;
+            }
+        });
+        clipboard.on('success', function(e) {
+            alert("复制成功");
+        });
+     
+        clipboard.on('error', function(e) {
+            console.log(e);
+        });
+    </script>
+</block>

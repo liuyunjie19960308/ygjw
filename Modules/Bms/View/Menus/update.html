@@ -1,0 +1,139 @@
+<extend name="Public/base" />
+
+<block name="main">
+
+    <div class="x-body" style="margin: 50px">
+        <form class="layui-form">
+            <input type="hidden"  value="<?php echo $list['id']?>" name="id"  class="layui-input">
+            <div class="layui-form-item">
+                <label class="layui-form-label" >
+                        <span class="x-red">
+                            *
+                        </span>
+                    菜单级别
+                </label>
+                <div class="layui-input-inline">
+                    <select name="pid">
+                        <option selected="selected" value="0">顶级菜单</option>
+                        <?php foreach($Privilege as $key=>$value):
+                        if($value['id']==$list['id']|| in_array($value['id'],$Privilege_id))
+                        continue;
+                        ?>
+                        <option value="<?php echo $value['id'] ?>"  > <?php echo $value['name'] ?> </option>
+                        <?php endforeach;?>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="name" class="layui-form-label">
+                    <span class="x-red">*</span>导航名称
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="name" value="<?php echo $list['name']?>" name="name" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*必须唯一性</span>
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label" >
+                 <span class="x-red">
+                       *
+                     </span>
+                    导航链接
+                </label>
+                <div class="layui-input-inline">
+                    <input autocomplete="off" class="layui-input" name="url" value="<?php echo $list['url']?>" lay-verify="url" required="" type="text">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+        <span class="x-red">
+            *必须http:开头
+        </span>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="sort" class="layui-form-label">
+                    <span class="x-red">*</span>排序
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="sort" name="sort" required="" value="<?php echo $list['sort']?>" lay-verify="sort"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    数字升序排序
+                </div>
+            </div>
+            <div style="margin-left: 100px">
+                <button  class="layui-btn" lay-filter="update" lay-submit="">
+                    确定
+                </button>
+                <button  onclick="javascript:history.back(-1);return false;" class="layui-btn layui-btn-primary" >
+                    返 回
+                </button>
+            </div>
+        </form>
+    </div>
+    <script>
+        //一般直接写在一个js文件中
+        layui.use(['layer', 'form'], function(){
+            var layer = layui.layer
+                ,form = layui.form;
+            //自定义验证规则
+            form.verify({
+                name: function(value){
+                    if(value.length < 5){
+                        return '名称至少得5个字符啊';
+                    }
+                }
+
+            });
+            //监听提交
+            form.on('submit(update)', function(data){
+                $.post("{:U('Menus/update')}",$(data.form).serialize(),
+                    function(res){
+                        if(res.code==200){
+                            layer.alert(res.msg, {icon: 6},function () {
+                                window.location.href="{:U('Menus/lists')}";
+                            });
+                        }
+                        if(res.code==201){
+                            layer.alert(res.msg, {icon: 5});
+                        }
+
+                    },'json');
+                return false;
+                //发异步，把数据提交给php
+
+
+            });
+        });
+    </script>
+    <script>
+        //重置ids
+        function setFileIds(obj,parent) {
+            var ids = [];
+            $(".element-box").find('.element-item').each(function(){
+                ids.push($(this).attr('data-val'));
+            });
+            if(ids.length > 0)
+                $(".values").val(ids.join(','));
+            else
+                $(".values").val('');
+        }
+        function removeElement(obj, parent) {
+            $(obj).parent().remove();
+            setFileIds(obj, parent);
+        }
+    </script>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <include file="Public/modal_goods"/>
+
+</block>

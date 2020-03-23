@@ -1,0 +1,131 @@
+<extend name="Public/base" />
+
+<block name="main">
+
+    <div class="x-body" style="margin: 50px">
+        <form class="layui-form">
+
+            <div class="layui-form-item">
+                <label for="banner_name" class="layui-form-label">
+                    <span class="x-red">*</span>Banner别名
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="banner_name" name="banner_name" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>
+                </div>
+            </div>
+
+
+            <div class="layui-upload" style="margin-left: 110px">
+                <div class="controls">
+            {:hook('upload',array('is_first'=>1,'unique_sign'=>'banner_image_img','field_name'=>'banner_image_img','field_value'=>$list['banner_image_img'],'save_path'=>'News'))}
+            <span class="help-block">* Banner图</span>
+        </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="banner_sort" class="layui-form-label">
+                    <span class="x-red">*</span>排序
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="banner_sort" name="banner_sort" required="" lay-verify="banner_sort"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    数字升序排序
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" >
+                        <span class="x-red">
+                            *
+                        </span>
+                    所属菜单
+                </label>
+                <div class="layui-input-inline">
+                    <select name="banner_type">
+                        <option selected="selected" value="">所有菜单 </option>
+                        <?php foreach($Privilege as $key=>$value): ?>
+                        <option value="<?php echo $value['id'] ?>"> <?php echo str_repeat('--',$value['level']*2).$value['name']?> </option>
+                        <?php endforeach;?>
+                    </select>
+                </div>
+            </div>
+          <div style="margin-left: 100px">
+                <button  class="layui-btn" lay-filter="add" lay-submit="">
+                    确定
+                </button>
+                <button  onclick="javascript:history.back(-1);return false;" class="layui-btn layui-btn-primary" >
+                    返 回
+                </button>
+            </div>
+        </form>
+    </div>
+                <script>
+                    //一般直接写在一个js文件中
+                    layui.use(['form','layer'], function(){
+                        $ = layui.jquery;
+                        var form = layui.form
+                            ,layer = layui.layer
+                            ,upload = layui.upload;
+                    //自定义验证规则
+                        form.verify({
+                            name: function(value){
+                                if(value.length < 5){
+                                    return '名称至少得5个字符啊';
+                                }
+                            }
+
+                        });
+                        //监听提交
+                        form.on('submit(add)', function(data){
+                            $.post("{:U('Banner/add')}",$(data.form).serialize(),
+                                function(res){
+                                    if(res.code==200){
+                                        layer.alert(res.msg, {icon: 6},function () {
+
+                                            window.location.href="{:U('Banner/lists')}";
+                                        });
+                                    }
+                                    if(res.code==201){
+                                        layer.alert(res.msg, {icon: 5});
+                                    }
+
+                                },'json');
+                            return false;
+                            //发异步，把数据提交给php
+
+
+                        });
+                    
+                    });
+                </script>
+                <script>
+                            //重置ids
+                            function setFileIds(obj,parent) {
+                                var ids = [];
+                                $(".element-box").find('.element-item').each(function(){
+                                    ids.push($(this).attr('data-val'));
+                                });
+                                if(ids.length > 0)
+                                    $(".values").val(ids.join(','));
+                                else
+                                    $(".values").val('');
+                            }
+                            function removeElement(obj, parent) {
+                                $(obj).parent().remove();
+                                setFileIds(obj, parent);
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <include file="Public/modal_goods"/>
+
+</block>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>支付成功</title>
+    <style type="text/css">
+        body{margin: 0;padding: 0;font-family: 微软雅黑;font-size: 0.14rem;}
+        a{text-decoration: none;color:#000;}
+        p{margin: 0;}
+        img{border:0;display:block;}
+        ul{ padding: 0;margin: 0;list-style: none;}
+        ul:after{content: "";display:block;clear: both;}
+        /**********大致兼容pc************/
+        /*@media screen and (min-width: 750px) {body{width:750px; margin:0 auto;}}*/
+        .tennt{position: absolute;top:0;height: 100%;width: 100%;display: flex;flex-direction: column;justify-content: ;}
+        .zfsb{margin-top: 15%;}
+        .zfsb>p{display: flex;justify-content: center;}
+        .zfsb>p img{width: 120px;height: 80px;}
+        .zfsb>div{text-align: center;}
+        .zfsb_z{margin-top: 20px;color: #04AA0F;font-weight: bold;font-size: 0.20rem;}
+        .fhsy{margin-top: 40px;}
+        .fhsy a{border: 1px solid #04AA0F;padding: 5px 30px;border-radius: 5px;color: #04AA0F;font-size: 0.16rem;}
+        .fhsy_d{margin-top: 30px;}
+
+        .coupon-content{border:0px solid #000; width: 95%; margin: 0 auto;margin-top: 30px;}
+
+        .youhuiquan{width: 100%;height: 120px;position: relative;overflow: hidden;margin: 15px 0;}
+        .youhuiquan img{position: absolute;top: 0;z-index:1;width: 100%;height: 120px;}
+        .youhuiquan div.left{width: 125px;height: 55px;position: absolute;z-index: 2;left: 10px;top: 20px;padding: 0px 0;}
+        .youhuiquan div.left>p{width: 100%;font-size: 15px;text-align: center;}
+        .youhuiquan div.left>p>text{width: 100%;font-size: 15px;font-weight: 900;}
+        .youhuiquan div.left>p>span{width: 100%;font-size: 38px;font-weight: 900;}
+        .youhuiquan div.right{position: absolute;z-index: 2;left: 110px;top: 10px;padding:0px 30px;width: 55%;}
+        .youhuiquan div.right>h3{letter-spacing: 0.1em;font-size: 14px;line-height: 10px;}
+        .youhuiquan div.right>h4{min-width: 100%;min-height: 0px;font-weight: 100;line-height: 0px;color: #9C9C9C;font-size: 13px;}
+        .youhuiquan div.right>p{min-width: 100%;min-height: 0px;font-weight: 100;line-height: 10px;color: #7E7707;font-size: 13px;padding: 10px 0;}
+        .youhuiquan div.right>button{border: none;outline: none;padding: 5px 10px;border-radius: 20px;background: #FFC90C;position: absolute;bottom: 25px;right: 40px;font-size: 12px;}
+        .guoqi .left>h2{color: #fff;}
+        .guoqi .left>p{color: #fff;}
+        .guoqi .right{color: #9C9C9C;}
+        .guoqi .right>p{color: #9C9C9C !important;}
+        .guoqi button{background: #9C9C9C !important;color: #fff;}
+    </style>
+</head>
+<body>
+<div class="tennt">
+    <div class="zfsb">
+        <p>
+            <img src="__IMG__/logoba/zfimg_success.png" alt="">
+        </p>
+        <div class="zfsb_z">
+            <!-- 支付成功 -->
+            <p>{$_REQUEST['msg']}</p>
+        </div>
+        <div class="fhsy">
+            <a href="/">
+                返回首页
+            </a>
+        </div>
+        <div class="fhsy fhsy_d">
+            <a href="{:U('Center/index')}">
+                查看订单
+            </a>
+        </div>
+    </div>
+    <div class="coupon-content">
+        <!-- <p>赠送您两张优惠券</p> -->
+        <volist name="list" id="coupon">
+            <if condition="$coupon['status'] eq 0">
+                <div class="youhuiquan">
+                    <img src="__IMG__/logoba/keyongquanditu.png" alt="">
+                    <div class="left">
+                        <p><text>￥</text><span>{:intval($coupon['face_value'])}</span></p>
+                        <p>{$coupon['type_name']}</p>
+                    </div>
+                    <div class="right">
+                        <h3>{$coupon['desc']}{$coupon['type_name']}</h3>
+                        <h4><if condition="$coupon['type'] eq 2">满{:intval($coupon['use_condition'])}减{:intval($coupon['face_value'])}</if></h4>
+                        <p>有效期至{$coupon['invalid_date']}</p>
+                        <button type="button" onclick="javascript:window.location.href='{$coupon[\'forward\']}'">立即使用</button>
+                    </div>
+                </div>
+            </if>
+        </volist>
+    </div>
+</div>
+<script type="text/javascript">
+    (function (doc, win) {
+    // 分辨率Resolution适配
+    var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if (clientWidth >= 750) {
+                docEl.style.fontSize = 100 + 'px';
+            }else{docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';}
+        }
+    // Abort if browser does not support addEventListener
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    recalc();
+})(document, window);
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+    <link rel="stylesheet" href="__CSS__/rem.css" />
+    <style>
+    .attbox{
+        background: #000000;
+    }
+    .attbox img{
+        margin-bottom: 0.2rem;
+    }
+</style>
+</block>
+
+<block name="content">
+
+    <div class="bmwbox">
+        <div class="attbox">
+            <volist name="materials" id="material">
+                <img src="{$material['pc_show']}" />
+            </volist>
+        </div>
+    </div>
+
+</block>

@@ -1,0 +1,49 @@
+<extend name="Public/base" />
+
+<block name="style">
+    <link rel="stylesheet" href="__CSS__/logoba/6-1-4my_grxinxi.css">
+</block>
+
+<block name="content">
+    <div class="box">
+        <form class="form-horizontal" method="post" action="{:U('Center/modifyInfo')}">
+        <div class="toux">
+            <div class="left">
+                <text>头像</text>
+            </div>
+            <div class="right">
+                <img src="{$info['avatar_path']}" onclick="upAvatar();" class="avatar circle">
+            </div>
+            <input type="hidden" name="avatar" value="{$info['avatar']}">
+            <input type="file" id="up-avatar" style="display: none" />
+        </div>
+        
+        <div class="xinxi">
+            <div class="zhanghao">
+                <p>账号<span>{$info['account_format']}</span></p>
+            </div>
+            <!-- <div class="shoujihao">
+                <p>账号<span>138****0489</span></p>
+            </div> -->
+        </div>
+        <button type="submit" class="ajax-post" target-form="form-horizontal" >确定</button>
+        </form>
+    </div>
+</block>
+<block name="script">
+    <script src='__JS__/common.js'></script>
+    <script src='__JS__/upload.js'></script>
+    <script>
+        function upAvatar()
+        {
+            upload($("#up-avatar"), "{:U('UpDownLoad/upload')}", 'avatar', '');
+        }
+        function afterUpSuccess(data, flag) {
+            $('.avatar').attr('src', data.oss_request_url);
+            $('.avatar').attr('file-id', data.id);
+            setFileIds($(".avatar"), $("input[name='avatar']"));
+        }
+        function success_callback(){}
+        function error_callback(){}
+    </script>
+</block>

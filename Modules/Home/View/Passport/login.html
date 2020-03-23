@@ -1,0 +1,65 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+	<link rel="stylesheet" href="__CSS__/index.css" />
+	<link rel="stylesheet" href="__CSS__/login.css" />
+</block>
+
+<block name="content">
+
+	<div class="logincont">
+		<div class="loghead">海选查询通道</div>
+		<div class="logname">
+			<span>身份证号：</span>
+			<input type="text" name="id_num" class="fsnum" placeholder="请输入身份证号或港澳台居民证件号"/>
+			<i></i>
+		</div>
+		<div class="logpawd logname">
+			<span>登录密码：</span>
+			<input type="password" name="password" class="pwds" placeholder="请输入登录密码"/>
+			<i></i>
+			<a href="{:U('Passport/findPass')}" class="ferget">忘记密码？</a>
+		</div>
+		
+		<div class="loginbtn login-btn">登录</div>
+	</div>
+			
+</block>
+<block name="footer-script">
+    <script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js" ></script>
+    <script src="__STATIC__/validform_5.3.2/Validform_v5.3.2_min.js"></script>
+    <script src="__JS__/validform.js"></script>
+    <script src="__JS__/common.js"></script>
+
+     <script>
+     	$(function(){
+
+            var id_num,password;
+
+            $(".login-btn").click(function(){
+				id_num             = $('input[name="id_num"]').val();
+                password           = $('input[name="password"]').val();
+
+                if (id_num == '') {
+                  showPop('请输入身份证号！', 'error', 1500, ''); return;
+                }
+                if (password == '') {
+                  showPop('请输入登录密码！', 'error', 1500, ''); return;
+                }
+
+                $.post('{:U("Passport/doLogin")}',{id_num:id_num,password:password}).success(function(data) {
+                  if (data.status == 1) {
+                  	  if (data.data.type == 1){
+                  	  	window.location.href='{:U("UserProfile/center")}';
+                  	  } else {
+                  	  	window.location.href='{:U("UserProfile/criccenter")}';
+                  	  }
+                      
+                  } else {
+                      showPop(data.info, 'error', 1500, ''); return;
+                  }
+                });
+            });
+     	  })
+     </script>
+</block>

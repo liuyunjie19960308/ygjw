@@ -1,0 +1,26 @@
+<extend name="Public/base" />
+
+<block name="main">
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a href="{:U('Member/index')}" data-toggle="">会员列表</a>
+                    </li>
+                    <li class="active">
+                        <a href="javascript:void(0)" data-toggle="">数据统计</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <Iframe src="{:C('NOW_HOST')}/Member/statTotal" width="100%" height="150" scrolling="yes" frameborder="0" id="Iframe-1"></Iframe>
+
+    <Iframe src="{:C('NOW_HOST')}/Member/statQuantityLine/unit/d" width="100%" height="480" scrolling="yes" frameborder="0" id="Iframe-2"></Iframe>
+
+    <Iframe src="{:C('NOW_HOST')}/Member/statGenderPie" width="100%" height="480" scrolling="yes" frameborder="0" id="Iframe-3"></Iframe>
+
+</block>

@@ -1,0 +1,95 @@
+<extend name="Public/base" />
+
+<block name="main">
+
+    <div class="row-fluid main-row-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab1">账号信息</a></li>
+                </ul>
+                <!--<div class="widget-title"></div>-->
+                <br>
+                <div class="widget-content tab-content no-padding">
+
+                    <div id="tab1" class="tab-pane active">
+                        <table class="bill-table" style="width:70%">
+                            <tr class="bg-tr">
+                                <td colspan="6" align="center">账户信息</td>
+                                <!-- <td width="50" align="right">
+                                    <a href="{:U('Member/update',array('id'=>$row['id']))}" title="编辑" class="">
+                                        <span class="label label-success label-success-hover">编辑</span></a>
+                                </td> -->
+                            </tr>
+                            <tr>
+                                <td width="15%">用户姓名</td><td width="30%">{$row['name']}</td>
+                                <td width="15%">用户角色</td><td colspan="2">
+                                    <if condition="$row['type'] eq 1">
+                                    <span class="badge badge-warning">选手</span>
+                                    <else/>
+                                    <span class="badge badge-warning">评委</span>
+                                    </if>
+                                </td>
+                                <td rowspan="4" style="width:160px">
+                                    <img src="{$row['avatar_path']}" width="160">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>身份证号</td><td>{$row['id_num']}</td>
+                                <td>手机号</td><td colspan="2">{$row['mobile']}</td>
+                            </tr>
+                            <tr>
+                                <td>邮箱</td><td>{$row['email']}</td>
+                                <td>性别</td><td colspan="2">{$row['gender'] == 1 ? '--' : '--'}</td>
+                            </tr>
+                            <tr>
+                                <td>单位/学校</td><td>{$row['agency']}</td>
+                                <td>职业</td><td colspan="2">{$row['profession']|default='---'}</td>
+                            </tr>
+                            <tr>
+                                <td>自媒体号</td><td>{$row['media']}</td>
+                                <td>自媒体粉丝</td><td colspan="3">{$row['media_fans']|default='---'}</td>
+                            </tr>
+                            <tr>
+                                <!--<td align="center">头像</td>-->
+                                <td>地址</td><td colspan="5">{$row['province_name']}{$row['city_name']}{$row['district_name']}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div id="tab2" class="tab-pane"></div>
+                    <div id="tab3" class="tab-pane"></div>
+                    <div id="tab4" class="tab-pane"></div>
+
+                    <div class="form-actions">
+                        <button class="btn" onclick="javascript:history.back(-1);return false;">返 回</button>　
+                        <!-- <button class="btn btn-danger ajax-post" url="" target-form="ids">拒绝通过</button>&nbsp;
+                        <button class="btn btn-info ajax-post" url="{:U('UserProfile/forbidResume',array('model'=>'UserProfile','field'=>'status','value'=>1))}" target-form="ids">确认通过</button>&nbsp; -->
+                    </div>
+
+                    <!--<div id="tab7" class="tab-pane">
+                        <div class="invoice-content">
+                            <div class="invoice-head invoice-left">
+                                <h5>
+                                    <br>
+                                    <ul class="stat-boxes">
+                                        {//hook('statistics',array('is_first'=>1,'stat_type'=>1,'peity'=>'bar-warning','title_text'=>'消费金额','title_en_text'=>'RMB','data'=>$stat['pay'],'default'=>0.00))}
+                                        {//hook('statistics',array('stat_type'=>1,'peity'=>'bar-success','title_text'=>'充值金额','title_en_text'=>'RMB','data'=>$stat['charge'],'default'=>0.00))}
+                                        {//hook('statistics',array('stat_type'=>1,'peity'=>'bar-info','title_text'=>'提现金额','title_en_text'=>'RMB','data'=>$stat['wd'],'default'=>0.00))}
+                                    </ul>
+                                    <div class="clear"></div>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--拒绝弹出层-->
+    <include file="UserProfile/modal_refuse_pass"/>
+
+</block>

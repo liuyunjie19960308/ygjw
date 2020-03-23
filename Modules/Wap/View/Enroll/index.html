@@ -1,0 +1,25 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+    <link rel="stylesheet" href="__CSS__/signup.css" />
+    <style type="text/css">
+    	body {background: #550C0F;}
+    </style>
+</block>
+
+<block name="content">
+
+	<div class="siupbox">
+		<div class="topbox">
+			<img src="__IMG__/haix.png" />
+		</div>
+		<div class="logins">
+			<a href="{:U('Passport/login')}">登录</a>
+			<a href="{:U('Enroll/signUp')}">报名</a>
+			
+		</div>
+		<div class="upimg">
+			<!-- <img src="__IMG__/upfoot.png" /> -->
+		</div>
+	</div>
+</block>

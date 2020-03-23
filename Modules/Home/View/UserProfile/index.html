@@ -1,0 +1,62 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+	<link rel="stylesheet" href="__CSS__/index.css" />
+	<link rel="stylesheet" href="__CSS__/login.css" />
+	<link rel="stylesheet" href="__CSS__/activity.css" />
+</block>
+
+<block name="content">
+
+	<div class="logincont">
+		<div class="loghead">全国海选部分选手公示</div>
+		<div class="sxconbox">
+		<div class="tablebox" style="width: 580px;">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>编号</th>
+						<th>姓名</th>
+						<th>赛区</th>
+						<th>报名类目</th>
+					</tr>
+				</thead>
+				<tbody>
+					<volist name="profiles" id="profile" offset="0" length='8'>
+					<tr>
+						<th>{$profile['sn']}</th>
+						<th>{$profile['name']}</th>
+						<th>{$profile['division']}</th>
+						<th>{$profile['classes']}</th>
+					</tr>
+					</volist>
+				</tbody>
+			</table>
+		</div>
+		<div class="tablebox" style="width: 580px;">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>编号</th>
+						<th>姓名</th>
+						<th>赛区</th>
+						<th>报名类目</th>
+					</tr>
+				</thead>
+				<tbody>
+					<volist name="profiles" id="profile" offset="8" length='8'>
+					<tr>
+						<th>{$profile['sn']}</th>
+						<th>{$profile['name']}</th>
+						<th>{$profile['sarea']}</th>
+						<th>{$profile['class']}</th>
+					</tr>
+					</volist>
+				</tbody>
+			</table>
+		</div>
+		
+		</div>
+		
+	</div>
+</block>

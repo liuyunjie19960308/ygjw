@@ -1,0 +1,18 @@
+<extend name="Public/base_mini" />
+
+<block name="main">
+
+    <!--总计部分 start-->
+    <div class="row-fluid">
+        <div class="span12 center">
+            <ul class="stat-boxes">
+                {:hook('statistics',array('is_first'=>1,'stat_type'=>1,'peity'=>'bar-default','title_text'=>'会员总数','title_en_text'=>'members','data'=>$total,'default'=>0))}
+                {:hook('statistics',array('stat_type'=>1,'peity'=>'bar-success','title_text'=>'正常会员','title_en_text'=>'members','data'=>$status_1,'default'=>0))}
+                {:hook('statistics',array('stat_type'=>1,'peity'=>'bar-important','title_text'=>'禁用会员','title_en_text'=>'members','data'=>$status_0,'default'=>0))}
+            </ul>
+            <a class="refresh" title="刷新" style="position: absolute;top: 5px;right: 10px"><i class="fa fa-refresh"></i></a>
+        </div>
+    </div>
+    <!--总计部分 end-->
+
+</block>

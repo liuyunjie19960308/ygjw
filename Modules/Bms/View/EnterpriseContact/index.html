@@ -1,0 +1,100 @@
+<extend name="Public/base" />
+
+<block name="main">
+
+    <div class="row-fluid main-row-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+
+                <div class="widget-title widget-title-search list-widget-title">
+                    <button class="btn btn-success href" url="{:U('EnterpriseContact/EnterpriseContact_add')}" target-form="ids">新增</button>&nbsp;
+                    <!--<button class="btn btn-inverse ajax-post" url="{:U('EnterpriseContact/statusAll',array('value'=>2))}" target-form="ids">禁用</button>&nbsp;-->
+                    <!--<button class="btn btn-info ajax-post" url="{:U('EnterpriseContact/statusAll',array('value'=>1))}" target-form="ids">启用</button>&nbsp;-->
+                    <button class="btn btn-danger confirm ajax-post" url="{:U('EnterpriseContact/deleteAll')}" target-form="ids">删除</button>&nbsp;
+                    <!--<button type="button" class="btn btn-primary move">移动</button>-->
+                    <span style="display: none">
+                    {$select,'target-form','ids'|replace}<button class="btn btn-primary ajax-post"  target-form="ids">确定</button>
+                    </span>
+                    <!--<form action="{:U('Article/index')}" method="post" class="form">-->
+                        <!--<input type="text" name="title" value="{$_REQUEST['title']}" placeholder="文章标题">-->
+                        <!--{$select}-->
+                        <!--<button class="btn btn-inverse">查询</button>-->
+                    <!--</form>-->
+                </div>
+
+                <div class="widget-content no-padding no-border">
+                    <table class="table table-bordered table-striped with-check reset-checkbox">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" id="title-checkbox" name="title-checkbox" class="check-all"/><!--<i class="icon-resize-vertical"></i>--></th>
+                            <th>ID</th>
+                            <th>城市名</th>
+                            <th>地址</th>
+                            <th>电话</th>
+                            <th>客户服务电话</th>
+                            <th>邮箱</th>
+                            <th><i class="fa fa-pencil"></i>排序</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+                        <empty name="list"><tr><td colspan="30">Aho！没有查询结果！！</td></tr></empty>
+                        <?php foreach($list as $v):?>
+                            <tr>
+                                <td><input type="checkbox" name="ids[]" value="<?php echo $v['id'];?>" class="ids"/></td>
+                            <td align="center">
+                                <?php echo $v['id'];?>                </td>
+
+                            <td align="left">
+                                <?php echo $v['name'];?>                </td>
+                                <td align="left">
+                                    <?php echo $v['place'];?>                </td>
+                                <td align="left">
+                                    <?php echo $v['phone'];?>                </td>
+                                <td align="left">
+                                    <?php echo $v['customer'];?>                </td>
+                                <td align="left">
+                                    <?php echo $v['mailbox'];?>                </td>
+                                <td align="center">
+                                    <?php echo $v['sort'];?>                </td>
+                                <td>
+                                    <a href="{:U('EnterpriseContact/desc',array('id'=>$v['id']))}" title="编辑" class="tip-bottom">
+                                        <span class="label label-success label-success-hover">编辑</span></a>&nbsp;
+                                    <!--<if condition="$v['status'] eq 2 or $v['status'] eq 1">-->
+                                        <!--<a href="{:U('EnterpriseContact/statusOne',array('value'=>$v['status'],'id'=>$v['id']))}" title="{$v['status']|show_status_name}" class="tip-bottom ajax-get">-->
+                                            <!--<span class="label {$v['status']|show_status_label}">{$v['status']|show_status_name}</span></a>&nbsp;-->
+                                    <!--</if>-->
+
+                                    <a href="{:U('EnterpriseContact/deleteOne',array('ids'=>$v['id']))}" data-ing-html="正在删除 <i class='fa fa-spinner fa-spin'></i>" title="删除" class="tip-bottom confirm ajax-get">
+                                        <span class="label label-important label-important-hover">删除</span></a>
+                                </td>
+                            </tr>
+                        <?php endforeach;?>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="pagination alternate">
+                    {$page}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script>
+        $(function(){
+            $('button.move').click(function(){
+                if($(this).next('span').css('display') == 'none') {
+                    $(this).next('span').show();
+                } else {
+                    $(this).next('span').hide();
+                }
+            })
+        })
+    </script>
+</block>

@@ -1,0 +1,97 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+    <link rel="stylesheet" href="__CSS__/rem.css" />
+    <link rel="stylesheet" href="__CSS__/swiper.css" />
+    <link rel="stylesheet" href="__CSS__/index.css" />
+</block>
+
+<block name="content">
+
+    <div class="sybox">
+        
+        <div class="headsobx">
+            <div class="syhead">
+                <img src="__IMG__/syhead.png" />
+            </div>
+            <div class="bannersy">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <volist name="banners" id="banner">
+                            <div class="swiper-slide" style="">
+                                <if condition="empty($banner['link_url'])">
+                                    <img src="{$banner['abs_url']}" style="object-fit: cover" />
+                                    <else/>
+                                    <a href="{$banner['link_url']}" target="_blank">
+                                        <img src="{$banner['abs_url']}" style="object-fit: cover" />
+                                    </a>
+                                </if>
+                            </div>
+                        </volist>
+                    </div>
+                    <!--<div class="swiper-pagination"></div>-->
+                </div>
+            </div>
+        </div>
+        
+        <div class="squlli">
+            <ul>
+                <li>
+                    <a href="{:U('Enroll/index')}">
+                        <img src="__IMG__/index1.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Enroll/acation')}">
+                        <img src="__IMG__/index2.png" />
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="{:U('UserProfile/index')}"> -->
+                    <a href="javascript:void(0)">
+                        <img src="__IMG__/index3.png" />
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="{:U('Agency/index')}"> -->
+                    <a href="javascript:void(0)">
+                        <img src="__IMG__/index4.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Bussiness/index')}">
+                        <img src="__IMG__/index5.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('About/index')}">
+                        <img src="__IMG__/index6.png" />
+                    </a>
+                    <!-- <a href="javascript:void(0)">
+                        <img src="__IMG__/index6.png" />
+                    </a> -->
+                </li>
+            </ul>
+        </div>
+        
+        <div class="foots">
+            <a   href="http://www.beian.miit.gov.cn/">{:C('WEB_SITE_ICP')}</a>
+            <!-- <p>《中国好诗歌》全国海选组委会</p>
+            <p>SHIGE! CHINA</p> -->
+        </div>
+        
+    </div>
+    
+<block name="footer-script">
+    <script src="__STATIC__/video/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__JS__/swiper.js" ></script>
+    <script language="javascript"> 
+        var mySwiper = new Swiper('.swiper-container',{
+            autoplay: true,//可选选项，自动滑动
+        })
+
+        // $(function(){
+        //     $('.swiper-slide').css({'width':'100%'});
+        // })
+    </script>
+</block>

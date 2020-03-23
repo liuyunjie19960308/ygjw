@@ -1,0 +1,41 @@
+<extend name="Public/base" />
+
+<block name="main">
+    <br>
+    <div class="row-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+                <!--<div class="widget-title">
+                    <span class="icon"><i class="fa fa-signal"></i></span>
+                    <h5>站点统计</h5>
+                </div>-->
+{:hook('upload',array('is_first'=>1,'queue_limit'=>5,'unique_sign'=>'pictures','field_name'=>'pictures','field_value'=>$row['pictures'],'save_path'=>'logo-dp','is_oss'=>1))}
+                <ul class="stat-boxes">
+                    {//hook('statistics',array('is_first'=>1,'stat_type'=>1,'peity'=>'bar-default','title_text'=>'会员总数','title_en_text'=>'members','data'=>$total_1,'default'=>0,'href'=>U('Member/index')))}
+                    {//hook('statistics',array('stat_type'=>1,'peity'=>'bar-success','title_text'=>'店铺总数','title_en_text'=>'shops','data'=>$total_2,'default'=>0,'href'=>U('Shop/index')))}
+                    {//hook('statistics',array('stat_type'=>1,'peity'=>'bar-important','title_text'=>'返利商品数','title_en_text'=>'goods','data'=>$total_3,'default'=>0,'href'=>U('RbtGoods/index')))}
+                    {//hook('statistics',array('stat_type'=>1,'peity'=>'bar-inverse','title_text'=>'积分商品数','title_en_text'=>'goods','data'=>$total_4,'default'=>0,'href'=>U('ItgGoods/index')))}
+                    {//hook('statistics',array('stat_type'=>1,'peity'=>'bar-info','title_text'=>'返利订单数','title_en_text'=>'orders','data'=>$total_5,'default'=>0,'href'=>U('RbtOrderInfo/index')))}
+                    {//hook('statistics',array('stat_type'=>1,'peity'=>'bar-important','title_text'=>'积分订单数','title_en_text'=>'orders','data'=>$total_6,'default'=>0,'href'=>U('ItgOrderInfo/index')))}
+                    {//hook('statistics',array('stat_type'=>1,'peity'=>'bar-warning','title_text'=>'投诉申请','title_en_text'=>'complain','data'=>$total_7,'default'=>0,'href'=>U('OrderComplainRecords/index')))}
+                </ul>
+
+                <div class="widget-content">
+                    <div class="row-fluid">
+                        <div class="span6">
+                            {:hook('statistics', ['is_first'=>1,'chart_id'=>'line-container1','chart_type'=>'spline','chart_data'=>$member_day_quantity_line,'core_content'=>1,'y_title_text'=>'quantity'])}
+                        </div>
+                        <div class="span6">
+                            {:hook('statistics', ['chart_id'=>'line-container2','chart_type'=>'spline','chart_data'=>$shop_day_quantity_line,'core_content'=>1,'y_title_text'=>'quantity'])}
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        {:hook('AdminIndex')}
+    </div>
+</block>
+<block name="script"></block>

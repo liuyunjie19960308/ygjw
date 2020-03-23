@@ -1,0 +1,63 @@
+.logincont{
+     		padding-bottom: 180px !important;
+     	}
+     	.zsbox{
+     		width: 442px;
+     		height: auto;
+     		background: white;
+     		padding: 0 35px;
+     		box-sizing: border-box;
+     		margin: auto;
+     		padding-bottom: 50px;
+     		position: relative;
+     	}
+     	.txcont{
+     		padding-top: 48px;
+     		text-align: center;
+     	}
+     	.txcont img{width: 226px;height: 226px;border-radius: 50%;}
+     	.zscontul{
+     		margin-top: 76px;
+     	}
+     	.zsli{
+     	width: 100%;
+     	height: 50px;
+     	border-bottom: 1px dotted #6C6C6C;
+     	display: flex;
+     	align-items: center;
+     	justify-content: space-between;
+     	flex-wrap: wrap;
+     	}
+     	.zsli span{
+     		width: 134px;
+     		font-size: 18px;
+     		color: #6C6C6C;
+     		line-height: 50px;
+     		text-align: left;
+     		display: inline-block;
+     	}
+     	.zsli input{
+     		font-size: 18px;
+     		height: 100%;
+     		width: 238px;
+     		display: inline-block;
+     	}
+     	.tiles{margin-top: 10px;
+     	font-size: 18px;
+     	color: #FF2418;
+     	line-height: 26px;
+     	text-align: left;
+     	}
+     	.smnum{
+     		position: absolute;
+     		width: 666px;
+     		text-align: left;
+     		margin: auto;
+     		left: 0;
+     		bottom: -150px;
+     	}
+     	.smnum p{
+     	   margin-top: 30px;
+     	   color: #FFFFFF;
+     	   font-size: 18px;
+     	}

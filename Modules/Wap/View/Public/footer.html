@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="__CSS__/logoba/footer.css">
+<footer>
+    
+    <div class="chaxun">
+        <img class="footer-bg" src="__IMG__/logoba/huang-ditu.png" alt="">
+        
+        <div class="cont">
+            <p>
+                <span>我想要</span>
+                <input type="text" name="" id="" value="" placeholder="选择您需要的服务" readonly="" onclick="iwantPopShowFooter()" class="i-want" /> <img class="xiala" src="__IMG__/logoba/xialajian.png" alt="">
+             </p>
+            <div class="hengxian"></div>
+            <p>
+                <span>手机号</span><input type="number" name="mobile" id="" value="" placeholder="请输入您的手机号" />
+            </p>
+        </div>
+        <button class="but mianfeizixun" type="button">免费咨询</button>
+
+        <div class="paoma">
+            <p></p>
+        </div>
+        
+    </div>
+
+    <!-- 选择服务类别 -->
+    <style type="text/css">
+        .iwant-pop-footer {width: 100%;height: 100%;position: fixed;display: none;top: 0;background: rgba(0, 0, 0, .7);z-index: 999;}
+        .pop-data {width: 90%;max-height: 1000px; overflow-y: scroll; background: #fff;margin-left: -441px;text-align: left;line-height: 130px;position: absolute;top: 40%;left: 50%;z-index: 99;border-radius: 30px;}
+        .juzhong1 {margin-top: -365px;}
+        .pop-data>h2 {width: 100%;height: 130px;background: #FFC90C;text-align: center;border-radius: 30px 30px 0 0;}
+        .pop-data>li {width: 100%;height: 110px;padding: 0 30px;border-bottom: 1px solid #ddd;border-radius: 30px;}
+    </style>
+    <div class="iwant-pop-footer">
+        <ul class="pop-data juzhong1">
+            <h2>请选择您的需求</h2>
+            <volist name="service_cate_list" id="cate">
+                <li data-id="{$cate['name']}" onclick="selectServiceCate(this)">
+                    <text>{$cate['name']}</text>
+                </li>
+            </volist>
+        </ul>
+    </div>
+    <script>
+        function iwantPopShowFooter() {
+            $('.iwant-pop-footer').show();
+        }
+        function selectServiceCate(o) {
+            $('.i-want').val($(o).attr('data-id'));
+        }
+        $('.mianfeizixun').click(function(){
+            var that = this;
+            var cate   = $(that).prev().find('.i-want').val();
+            var mobile = $(that).prev().find("input[name='mobile']").val();
+            $.post('{:U("System/zixun")}',{'cate':cate,'mobile':mobile}).success(function(data) {
+                if (data.status == 0) {
+                    showPop(data.info, 'error', 1500, 'callback');
+                } else {
+                    showPop(data.info, 'success', 1500, 'callback');
+                    $(that).prev().find('.i-want').val('');
+                    $(that).prev().find("input[name='mobile']").val('');
+                }
+            })
+        });
+        function error_callback(){}
+        function success_callback(){}
+        $('.iwant-pop-footer').click(function(e){
+            $(this).hide();
+        });
+    </script>
+
+    <div class="zixun">
+        <ul>
+            <li class="zxzx">
+                <a href="{:C('ONLINE')}" target="_blank">
+                    <img src="__IMG__/logoba/zaixianzixun.png" alt=""><span>在线咨询</span>
+                </a>
+            </li>
+            <li class="dhzx">
+                <a href="tel:{:C('TEL')}" target="_blank">
+                    <img src="__IMG__/logoba/dianhua-baidi.png" alt=""><span>电话咨询</span>
+                </a>
+            </li>
+            <li class="qqzx">
+                <!-- <a href="mqqwpa://im/chat?chat_type=wpa&uin={:C('QQ')}&version=1&src_type=web&web_src=oicqzone.com"> -->
+                <a href="/#1mao">
+                    <img src="__IMG__/logoba/kaishisheji.png" alt=""><span>开始设计</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</footer>

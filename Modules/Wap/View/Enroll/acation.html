@@ -1,0 +1,320 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+    <link rel="stylesheet" href="__CSS__/bmdel.css" />
+    <link rel="stylesheet" href="__CSS__/cation.css" />
+</block>
+
+<block name="content">
+
+  <div class="bmwbox">
+    <div class="bmheas">
+      <img src="__IMG__/logo.png" />
+      <p class="bmyear"><a>————</a><span>2020</span><a>————</a></p>
+      <span class="btext">全国海选评委资格认证
+                <p class="logina"><i>如有账号请</i><a href="{:U('Passport/login')}">点击登录</a></p>     
+      </span>
+      
+    </div>
+    <div class="bmdata">
+      
+      <div class="datali">
+        <span>姓名</span>
+        <div class="datainput"><input type="text" name="name" placeholder="请输入姓名"/></div>
+        <i></i>
+      </div>
+      <div class="datali">
+        <span>性别</span>
+        <div class="datainput">
+          <select name="gender" class="gender">
+            <option value="">——请选择——</option>
+            <option value="男">男</option>
+            <option value="女">女</option>
+          </select>
+        </div>
+        <i></i>
+      </div>
+      <div class="datali">
+        <span>手机号码</span>
+        <div class="datainput"><input type="text" name="mobile" placeholder="请输入手机号码"/></div>
+        <i></i>
+      </div>
+      <div class="datali">
+        <span>身份证号</span>
+        <div class="datainput"><input type="text" name="id_num" placeholder="请输入身份证号或港澳台居民证件号"/></div>
+        <i></i>
+      </div>
+      <div class="datali">
+        <span>邮箱</span>
+        <div class="datainput"><input type="text" name="email" placeholder="请输入常用邮箱"/></div>
+      </div>
+      <div class="datali">
+        <span>擅长类目</span>
+        <div class="datainput">
+          <select name="classes" class="classes">
+            <option value="">——请选择——</option>
+            <volist name="classes" id="classe">
+                <option value="{$classe}">{$classe}</option>
+            </volist>
+          </select>
+        </div>
+        <i></i>
+      </div>
+      <div class="datali">
+        <span>登录密码</span>
+        <div class="datainput"><input type="password" name="password" placeholder="请输入登录密码"/></div>
+        <i></i>
+      </div>
+      <div class="datali">
+        <span>确认密码</span>
+        <div class="datainput"><input type="password" name="re_password" placeholder="请确认密码"/></div>
+        <i></i>
+      </div>
+      <div class="datali">
+        <span>赛区组委会 推荐人</span>
+        <div class="datainput"><input type="text" name="recom" placeholder="请输入推荐人姓名"/></div>
+        <i></i>
+      </div>
+      <div class="datali lvlia">
+        <span>个人履历</span>
+        <div class="datainput lvlicont">
+          <textarea name="cv" placeholder="请输入个人履历" maxlength="300"></textarea>
+        </div>
+        <i></i>
+      </div>
+      <div class="datali">
+        <span>赛区</span>
+        <div class="datainput sqselect saiqu" data-toggle="distpicker" >
+          <select class="form-control" name="province_name" id="province1" class="province_name"></select>
+          <select class="form-control" name="city_name" id="city1" class="city_name"></select>
+          <select class="form-control" name="area_name" id="district1" class="area_name"></select>
+        </div>
+        <i></i>
+      </div>
+      <!-- <div class="datali">
+        <span>高校赛区</span>
+        <div class="datainput">
+          <select name="college_division" class="college_division">
+            <option value="">——请选择——</option>
+            <volist name="colleges" id="college">
+                <option value="{$college}">{$college}</option>
+            </volist>
+          </select>
+        </div>
+        <i></i>
+      </div> -->
+      <div class="datali">
+        <span>高校赛区</span>
+        <div class="datainput sqselect gaoxiao" data-toggle="distpicker1" >
+          <select class="form-control" name="" id="province2" class=""></select>
+          <select class="form-control" name="" id="" class=""></select>
+          <select class="form-control college_division" name="college_division" id=""></select>
+        </div>
+        <i></i>
+      </div>
+      <div class="datali">
+        <span>上传照片(1M以内)</span>
+        <div class="datainput footsaw">
+          <p class="lecos">
+            <img src="__IMG__/uplode.png" class="uplods avatar" onclick="upAvatar();"/>
+            <input type="hidden" name="avatar" value="">
+            <input type="file" id="up-avatar" style="display: none" />
+            <i class="xxcont"></i>
+          </p>
+          
+        </div>
+        <i></i>
+      </div>
+
+    </div>
+      
+      <div class="tjbtn">
+        <a href="javascript:void(0)"><button class="submit">提交</button></a>
+      </div>
+      
+      <!--说明-->
+      <div class="waixz"  >
+        <div class="xuzhi">
+            <div class="smhead">{$art['title']}</div>
+            <div class="xzcomt">
+              {$art['content']}
+            </div>
+            <div class="angrui">
+              <input type="button" value="同意" class="tybtn" />
+              <input type="button" value="拒绝" class="jjbtn" />
+            </div>
+        </div>
+      </div>
+  </div>
+
+</block>
+<block name="footer-script">
+    <script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js" ></script>
+    <script src="__STATIC__/validform_5.3.2/Validform_v5.3.2_min.js"></script>
+    <script src="__JS__/validform.js"></script>
+    <script src="__JS__/common.js"></script>
+    <script src="__JS__/distpicker.data.js"></script>
+    <script src="__JS__/distpicker.js"></script>
+    <script src="__JS__/distpicker.data1.js"></script>
+    <script src="__JS__/distpicker1.js"></script>
+    <script src='__JS__/upload.js'></script>
+    <script>
+        function upAvatar()
+        {
+            upload($("#up-avatar"), "{:U('UpDownLoad/upload')}", 'avatar', '');
+        }
+        function afterUpSuccess(data, flag) {
+            $('.avatar').attr('src', data.abs_url);
+            $('.avatar').attr('file-id', data.id);
+            setFileIds($(".avatar"), $("input[name='avatar']"));
+        }
+        function success_callback(){}
+        function error_callback(){}
+    </script>
+
+     <script>
+        $(function(){
+
+            var type=2,name,gender,id_num,mobile,email,classes,password,re_password,province_name,
+            city_name,area_name,college_division,avatar;
+
+            $(".submit").click(function(){
+                name             = $('input[name="name"]').val();
+                gender           = $('.gender option:selected').val();
+                id_num           = $('input[name="id_num"]').val();
+                mobile           = $('input[name="mobile"]').val();
+                email            = $('input[name="email"]').val();
+                classes          = $('.classes option:selected').val();
+                recom            = $('input[name="recom"]').val();
+                cv               = $('textarea[name="cv"]').val();
+                password         = $('input[name="password"]').val();
+                re_password      = $('input[name="re_password"]').val();
+                province_name    = $('#province1 option:selected').val();
+                city_name        = $('#city1 option:selected').val();
+                area_name        = $('#district1 option:selected').val();
+                college_division = $('.college_division option:selected').val();
+                avatar           = $('input[name="avatar"]').val();
+
+                if (name == '') {
+                  showPop('请输入您的姓名！', 'error', 1500, ''); return;
+                }
+                if (gender == '') {
+                  showPop('请选择性别！', 'error', 1500, ''); return;
+                }
+                if (mobile == '') {
+                  showPop('请输入手机号码！', 'error', 1500, ''); return;
+                }
+                if (id_num == '') {
+                  showPop('请输入身份证号！', 'error', 1500, ''); return;
+                }
+                // if (email == '') {
+                //   showPop('请输入邮箱地址！', 'error', 1500, ''); return;
+                // }
+                if (classes == '') {
+                  showPop('请选择擅长的类目！', 'error', 1500, ''); return;
+                }
+                if (password == '') {
+                  showPop('请输入登录密码！', 'error', 1500, ''); return;
+                }
+                if (re_password == '') {
+                  showPop('请输入确认密码！', 'error', 1500, ''); return;
+                }
+                if (password != re_password) {
+                  showPop('登录密码和确认密码不一致！', 'error', 1500, ''); return;
+                }
+                if (recom == '') {
+                  showPop('请输入推荐人！', 'error', 1500, ''); return;
+                }
+                if (cv == '') {
+                  showPop('请输入个人履历！', 'error', 1500, ''); return;
+                }
+                if ((province_name == '' || city_name == '') && college_division == '') {
+                  showPop('请选择赛区！', 'error', 1500, ''); return;
+                }
+                if (avatar == '') {
+                  showPop('请上传您的照片！', 'error', 1500, ''); return;
+                }
+
+                if (college_division != '') {
+                  division = college_division;
+                } else {
+                  division = province_name+city_name+area_name;
+                }
+
+                // $('.qr-name').val(name);
+                // $('.qr-gender').val(gender);
+                // $('.qr-id_num').val(id_num);
+                // $('.qr-mobile').val(mobile);
+                // $('.qr-email').val(email);
+                // $('.qr-classes').val(classes);
+                // $('.qr-division').val(division);
+                // $('.qr-recom').val(recom);
+
+                // $('.bmbox').show();
+                
+                $.post('{:U("UserProfile/add")}',{type:type,name:name,id_num:id_num,mobile:mobile,gender:gender,email:email,classes:classes,
+                  division:division,avatar:avatar,password:password,re_password:re_password,recom:recom,cv:cv}).success(function(data) {
+                  if (data.status == 1) {
+                      window.location.href='{:U("UserProfile/criccenter")}';
+                  } else {
+                      showPop(data.info, 'error', 1500, ''); return;
+                  }
+                });
+            });
+
+            $(".bmright").click(function(){
+                $.post('{:U("UserProfile/add")}',{type:type,name:name,id_num:id_num,mobile:mobile,gender:gender,email:email,classes:classes,
+                  division:division,avatar:avatar,password:password,re_password:re_password,recom:recom,cv:cv}).success(function(data) {
+                  if (data.status == 1) {
+                      window.location.href='{:U("UserProfile/criccenter")}';
+                  } else {
+                      showPop(data.info, 'error', 1500, ''); return;
+                  }
+                });
+            });
+
+            $('#province1').change(function(){
+              if($(this).val() == '') {
+                //$('.college_division').attr('disabled', false);
+                $('.gaoxiao').find('.form-control').attr('disabled', false);
+              } else {
+                //$('.college_division').attr('disabled', true);
+                $('.gaoxiao').find('.form-control').attr('disabled', true);
+              }
+            })
+
+            $('#province2').change(function(){
+              if($(this).val() == '') {
+                $('#province1').attr('disabled', false);
+                $('#city1').attr('disabled', false);
+                $('#district1').attr('disabled', false);
+              } else {
+                $('#province1').attr('disabled', true);
+                $('#city1').attr('disabled', true);
+                $('#district1').attr('disabled', true);
+              }
+            })
+          })
+     </script>
+
+     <script>
+  $(function(){
+    
+    $(".tybtn").click(function(){
+      $(".waixz").hide();
+    })
+    $(".jjbtn").click(function(){
+      window.location.href="/";
+    })
+    $("#city1").change(function(){
+        if($('#district1 option:eq(1)').val()==undefined){
+          $("#district1").hide();
+        }else{
+          $("#district1").show();
+        }
+      })
+  })
+</script>
+
+</block>
+

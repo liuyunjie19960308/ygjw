@@ -1,0 +1,24 @@
+<div id="del-relation" class="modal hide">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>删除推荐关系</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal del-relation-form" method="post" action="{:U('Member/delRelation')}">
+            <p>
+                <!-- <textarea placeholder="" name="recommended_account" style="width:97%;height: 100px;"></textarea> -->
+                <input type="text" name="recommended_account" placeholder="请输入被推荐人账号">
+            </p>
+            <input type="hidden" name="recommender_id" value="">
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary ajax-post" target-form="del-relation-form" type="submit">确 定</button>
+        <a data-dismiss="modal" class="btn" href="javascript:void(0)">取消</a>
+    </div>
+</div>
+<script>
+    function del_relation_setID(obj) {
+        $('input[name="recommender_id"]').val($(obj).attr('data-id'));
+    }
+</script>

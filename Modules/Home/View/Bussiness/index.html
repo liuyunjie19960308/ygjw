@@ -1,0 +1,17 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+	<link rel="stylesheet" href="__CSS__/index.css" />
+</block>
+
+<block name="content">
+
+	<div class="beancontbox">
+		<div class="tpattr">
+			<volist name="materials" id="material">
+				<div class="consmus"><img src="{$material['pc_show']}"/></div>
+			</volist>
+        </div>
+	</div>
+
+</block>

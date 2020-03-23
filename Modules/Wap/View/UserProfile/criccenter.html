@@ -1,0 +1,41 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+	<link rel="stylesheet" href="__CSS__/bmdel.css" />
+    <link rel="stylesheet" href="__CSS__/cation.css" />
+</block>
+
+<block name="content">
+
+	<div class="bmwbox">
+		<div class="bmheas">
+			<img src="__IMG__/logo.png" />
+			<p class="bmyear"><a>————</a><span>2020</span><a>————</a></p>
+			<span class="btext">全国海选评委资格认证通道</span>
+			
+		</div>
+		
+		<div class="tjcont">
+			<if condition="$profile['status'] eq 0">
+		    	<p>资格认证提交成功!</p>
+		    	<p>请您保持手机畅通</p>
+		    	<p>稍后会有工作人员与您联系</p>
+		    	<p>认证审核中（5个工作日)......</p>
+	    	</if>
+	    	<if condition="$profile['status'] eq 1">
+	    		<p>资格认证提交成功!</p>
+		    	<p>请您保持手机畅通</p>
+		    	<p>稍后会有工作人员与您联系</p>
+		    	<p>认证审核中（5个工作日)......</p>
+	    		<!-- <p>恭喜您的评委资质已通过审核！</p> -->
+	    	</if>
+	    	<if condition="$profile['status'] eq 2">
+	    		<p>资格认证提交成功!</p>
+		    	<p>请您保持手机畅通</p>
+		    	<p>稍后会有工作人员与您联系</p>
+		    	<p>认证审核中（5个工作日)......</p>
+	    		<!-- <p>您的评委资格认证申请已被拒，原因【{$profile['refuse_remark']}】！</p> -->
+	    	</if>
+		</div>
+	</div>
+</block>

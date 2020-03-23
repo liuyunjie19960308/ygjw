@@ -1,0 +1,91 @@
+<div class="btn-group">
+    <button type="button" class="btn checked" data-default="--选择省份--"></button>
+    <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+    <ul class="dropdown-menu province-ul dropdown-menu-overflow-y dropdown-menu-region-list">
+        <volist name="provinces" id="province">
+            <li data-value="{$province['region_id']}|{$province['region_name']}" data-type="{$province['region_type']}" data-title="{$province['region_name']}" <if condition="$province['region_id'] eq $row['province_id'] or $province['region_name'] eq $row['province_name']">class="selected"</if>>
+            <a href="javascript:void(0)">{$province['region_name']}</a>
+            </li>
+        </volist>
+    </ul>
+</div>
+<input type="hidden" name="province_info" value="{$row['province_id']}|{$row['province_name']}">
+<div class="btn-group">
+    <button type="button" class="btn checked" data-default="--选择城市--"></button>
+    <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+    <ul class="dropdown-menu city-ul dropdown-menu-overflow-y dropdown-menu-region-list">
+        <volist name="cities" id="city">
+            <li data-value="{$city['region_id']}|{$city['region_name']}" data-type="{$city['region_type']}" data-title="{$city['region_name']}" <if condition="$city['region_id'] eq $row['city_id'] or $city['region_name'] eq $row['city_name']">class="selected"</if>>
+                <a href="javascript:void(0)">{$city['region_name']}</a>
+            </li>
+        </volist>
+    </ul>
+</div>
+<input type="hidden" name="city_info" value="{$row['city_id']}|{$row['city_name']}">
+<div class="btn-group">
+    <button type="button" class="btn checked" data-default="--选择区县--"></button>
+    <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+    <ul class="dropdown-menu district-ul dropdown-menu-overflow-y dropdown-menu-region-list">
+        <volist name="districts" id="district">
+            <li data-value="{$district['region_id']}|{$district['region_name']}" data-type="{$district['region_type']}" data-title="{$district['region_name']}" <if condition="$district['region_id'] eq $row['district_id'] or $district['region_name'] eq $row['district_name']">class="selected"</if>>
+            <a href="javascript:void(0)">{$district['region_name']}</a>
+            </li>
+        </volist>
+    </ul>
+</div>
+<input type="hidden" name="district_info" value="{$row['district_id']}|{$row['district_name']}">
+<!--<div class="btn-group">
+    <button type="button" class="btn checked" data-default="--选择商圈--"></button>
+    <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+    <ul class="dropdown-menu circle-ul dropdown-menu-overflow-y dropdown-menu-region-list">
+        <li data-value="0" data-type="3" data-title="全部">
+            <a href="javascript:void(0)">全部</a>
+        </li>
+        <volist name="circles" id="circle">
+            <li data-value="{$circle['region_id']}" data-type="{$circle['region_type']}" data-title="{$circle['name']}" <eq name="circle['region_id']" value="$row['circle_id']">class="selected"</eq>>
+            <a href="javascript:void(0)">{$circle['name']}</a>
+            </li>
+        </volist>
+    </ul>
+</div>
+<input type="hidden" name="circle_id" value="{$row['circle_id']}">-->
+<script>
+    //下拉菜单点击事件
+    $('ul.dropdown-menu-region-list li').bind('click',function(){
+        var that = $(this);
+        that.parents('div.btn-group').find('button.checked').html(that.attr('data-title'));
+        that.parents('div.btn-group').next('input').val(that.attr('data-value'));
+        aaa(this);
+    });
+    function aaa(obj) {
+        var that = $(obj), region_id = that.attr('data-value'), region_type = that.attr('data-type');
+        that.parents('div.btn-group').find('button.checked').html(that.attr('data-title'));
+        that.parents('div.btn-group').next('input').val(that.attr('data-value'));
+        var data = {region_id:region_id};
+        $.post('{:U("Region/getRegions")}',data).success(function(data){
+            if (data.status == 1) {
+                var html = '';
+                for(var i in data.data) {
+                    html += '<li onclick="aaa(this);" data-value="'+data.data[i]['region_id']+'|'+data.data[i]['region_name']+'" data-type="'+data.data[i]['region_type']+'" data-title="'+data.data[i]['region_name']+'"> ' +
+                                '<a href="javascript:void(0)">'+data.data[i]['region_name']+'</a> ' +
+                            '</li>';
+                }
+                if(region_type == 1) {
+                    $('.district-ul').html('');
+                    $('.district-ul').parents('div.btn-group').find('button.checked').html('--选择区域--');
+                    $('.district-ul').parents('div.btn-group').next('input').val('');
+                    $('.city-ul').parents('div.btn-group').find('button.checked').html('--选择城市--');
+                    $('.city-ul').parents('div.btn-group').next('input').val('');
+                    $('.city-ul').html(html);
+                }
+                if(region_type == 2) {
+                    $('.district-ul').parents('div.btn-group').find('button.checked').html('--选择区域--');
+                    $('.district-ul').parents('div.btn-group').next('input').val('');
+                    $('.district-ul').html(html);
+                }
+            } else {
+
+            }
+        });
+    }
+</script>

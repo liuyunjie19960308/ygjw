@@ -1,0 +1,23 @@
+<div id="modal-refuse-pass" class="modal hide">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>信息审核不通过</h3>
+    </div>
+    <div class="modal-body">
+        <form action="" method="" class="refuse-form">
+            <p>
+                <textarea placeholder="填写拒绝通过的原因" name="refuse_remark" style="width:97%;height: 150px;"></textarea>
+            </p>
+            <input type="hidden" name="user_id" value="" class="refuse-id">
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a data-dismiss="modal" class="btn btn-primary ajax-post" url="{:U('UserProfile/refusePass')}" target-form="refuse-form" href="javascript:void(0)">确定拒绝</a>
+        <a data-dismiss="modal" class="btn" href="javascript:void(0)">取消</a>
+    </div>　
+</div>
+<script>
+    function setID(obj) {
+        $('.refuse-id').val($(obj).attr('data-user-id'));
+    }
+</script>

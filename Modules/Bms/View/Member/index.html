@@ -1,0 +1,175 @@
+<extend name="Public/base" />
+
+<block name="main">
+    <div class="row-fluid main-row-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="javascript:void(0)" data-toggle="">会员列表</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Member/stat',['unit'=>'d'])}" data-toggle="">数据统计</a>
+                    </li>
+                </ul>
+
+                <div class="widget-title widget-title-search list-widget-title">
+                    <button class="btn btn-success href" url="{:U('Member/add')}" target-form="ids">新增</button>&nbsp;
+                    <button class="btn btn-inverse ajax-post" url="{:U('Member/forbidResume',array('model'=>'Member','field'=>'status','value'=>0))}" target-form="ids">禁用</button>&nbsp;
+                    <button class="btn btn-info ajax-post" url="{:U('Member/forbidResume',array('model'=>'Member','field'=>'status','value'=>1))}" target-form="ids">启用</button>&nbsp;
+                    <button class="btn btn-success href" url="{:U('ToUsers/send',array('model'=>'Member'))}">发信</button>&nbsp;
+                    <!-- <button class="btn btn-info href" url="{:U('Exp/getW')}">导出数据</button>&nbsp; -->
+                    <!--<button class="btn btn-warning href" url="{:U('ToUsers/give',array('model'=>'Member'))}">发送优惠券</button>&nbsp;-->
+                    <form action="{:U('Member/index')}" method="post" class="form">
+                        <input type="text" name="account" value="{$_REQUEST['account']}" placeholder="会员账号">
+                        <span class="date-group date">
+                            <input type="text" name="start_time" class="form-control date-group-addon" value="{$_REQUEST['start_time']}" placeholder="注册时间" readonly>
+                        </span>
+                        <div class="btn-group">
+                            <button type="button" class="btn checked" data-default="--选择等级--"></button>
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                <!--<span class="checked" data-default="--选择分组--"></span>--><span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li data-value="" data-title="--取消选择--"><a href="javascript:void(0)">--取消选择--</a></li>
+                                <volist name="level_rules" id="rule">
+                                    <li data-value="{$rule['level']}" data-title="{$rule['name']}" <eq name="rule['level']" value="$_REQUEST['level']">class="selected"</eq>>
+                                    <a href="javascript:void(0)">{$rule['name']}</a>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <input type="hidden" name="level" value="{$_REQUEST['level']}">
+                        <button class="btn btn-inverse">查询</button>
+                        <button type="button" class="btn btn-warning senior">高级</button>
+                        <div class="senior-search" style="width: 200px;height: 200px;">
+                            <p>
+                                <input type="text" name="id" value="{$_REQUEST['id']}" placeholder="会员ID">
+                            </p>
+                            <p>
+                                <input type="text" name="city_name" value="{$_REQUEST['city_name']}" placeholder="城市名称">
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="widget-content no-padding no-border">
+                    <table class="table table-bordered table-striped with-check reset-checkbox">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" id="title-checkbox" name="title-checkbox" class="check-all"/><!--<i class="icon-resize-vertical"></i>--></th>
+                            <th>ID</th>
+                            <th>昵称</th>
+                            <th>{:hook('quickSort',array('title'=>'等级','field'=>'m.level'))}</th>
+                            <th>账号</th>
+                            <!-- <th>性别/已绑定</th> -->
+                            <th>所在城市</th>
+                            <!--<th>我的</th>-->
+                            <!-- <th>{:hook('quickSort',array('title'=>'积分','field'=>'m.integral'))}</th> -->
+                            <!--<th>佣金(元)
+                                <a data-original-title="该金额是用户提现中的总金额" href="javascript:void(0)" class="tip-right black-1">
+                                    <i class="fa fa-question-circle"></i>
+                                </a>
+                            </th>-->
+                            <th>登陆次数</th>
+                            <th>最后登陆时间</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+                        <empty name="list"><tr><td colspan="30">Aho！没有查询结果！！</td></tr></empty>
+                        <volist name="list" id="row">
+                            <tr>
+                                <td><input type="checkbox" name="ids[]" value="{$row['id']}" class="ids"/></td>
+                                <td>{$row['id']}</td>
+                                <td><img src="{$row['avatar_path']}" style="width: 30px;height: 30px" class="img-circle"> {$row['nickname']}</td>
+                                <td>{$row['extra']['level_name']}</td>
+                                <td>{$row['account']}</td>
+                                <!-- <td>
+                                    <if condition="$row['gender'] eq 1"><i class="fa fa-male"></i></if>
+                                    <if condition="$row['gender'] eq 2"><i class="fa fa-female"></i></if>
+                                     / <if condition="$row['extra']['qq'] eq 1"><i class="fa fa-qq" title="已绑定QQ"></i><else/><i class="fa fa-qq" style="color: #ccc"></i></if>
+                                    <if condition="$row['extra']['wx'] eq 1"><i class="fa fa-weixin" title="已绑定微信"></i><else/><i class="fa fa-weixin" style="color: #ccc"></i></if>
+                                </td> -->
+                                <td>{$row['city_name']|default='---'}</td>
+                                <!--<td>
+                                    <a href="{:U('BalanceTurnover/index',array('m_id'=>$row['id'],'status'=>1))}" title="余额记录" class="">
+                                        <span class="badge badge-warning badge-warning-hover">余额记录</span></a>
+                                    <a href="{:U('CashTurnover/index',array('m_id'=>$row['id'],'status'=>1))}" title="资金记录" class="">
+                                        <span class="badge badge-warning badge-warning-hover">资金记录</span></a>
+                                </td>-->
+                                <!-- <td>{$row['integral']}</td> -->
+                                <td>{$row['login_times']} 次</td>
+                                <td>{$row['last_login_time']|timestamp2date}</td>
+                                <td>{$row['status']|get_status_title}</td>
+                                <td>
+                                    <!--<a href="{:U('Member/update',array('id'=>$row['id']))}" title="编辑" class="tip-bottom">
+                                        <span class="label label-success">编辑</span></a>&nbsp;-->
+                                    <a href="{:U('Member/detail',array('id'=>$row['id']))}" title="详情" class="">
+                                        <span class="label label-hover">详情</span></a>&nbsp;
+                                    <if condition="$row['status'] eq 0 or $row['status'] eq 1">
+                                        <a href="{:U('Member/forbidResume',array('model'=>'Member','ids'=>$row['id'],'field'=>'status','value'=>abs(1-$row['status'])))}" title="{$row['status']|show_status_name}" class="ajax-get">
+                                            <span class="label {$row['status']|show_status_label}">{$row['status']|show_status_name}</span></a>&nbsp;
+                                    </if>
+                                    <span class="navbar">
+                                    <ul class="nav">
+                                        <li id="fat-menu" class="dropdown" style="line-height: 26px;">
+                                            <a id="drop3" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                                                <span class="label label-primary label-primary-hover">更多操作<b class="caret"></b></span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labeledby="drop3">
+                                                <!-- <li role="presentation">
+                                                    <a href="{:U('Member/adjust',array('model'=>'Member','ids'=>$row['id']))}" title="调整" data-confirm="" class="">
+                                                        调整资料</a></li> -->
+                                                <li role="presentation">
+                                                    <a href="{:U('ToUsers/send',array('receive_rule'=>3,'where'=>$row['id'],'model'=>'Member'))}" title="发信" class="">
+                                                        发信</a></li>
+                                                <!--<li role="presentation">
+                                                    <a href="{:U('ToUsers/give',array('receive_rule'=>3,'where'=>$row['id'],'model'=>'Member'))}" title="发优惠券" class="">
+                                                        发优惠券</a></li>-->
+                                                <li role="presentation" class="divider"></li>
+                                                <li role="presentation">
+                                                    <a href="{:U('Member/delete',array('model'=>'Member','ids'=>$row['id'],'shop_id'=>$row['shop']['shop_id']))}" title="删除" data-confirm="您正在删除用户资料，请谨慎操作，确定要执行吗！" data-ing-html="正在删除 <i class='fa fa-spinner fa-spin'></i>" class="confirm ajax-get">
+                                                        删除</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    </span>
+                                </td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination alternate">
+                    {$page}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <include file="./Modules/Bms/View/Member/modal_del_relation.html"/>
+
+</block>
+<block name="script">
+    <!--日历 start-->
+    <link href="__STATIC__/plugins/datepicker/datepicker3.css" rel="stylesheet">
+    <script src="__STATIC__/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!--日历 end-->
+    <script>
+        $(function(){
+            $('span.date-group').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: false, //显示第几周
+                autoclose: true
+            });
+        })
+    </script>
+</block>

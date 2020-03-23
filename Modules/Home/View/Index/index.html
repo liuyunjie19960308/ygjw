@@ -1,0 +1,90 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+	<link rel="stylesheet" href="__CSS__/index.css" />
+	<link rel="stylesheet" href="__CSS__/swiper.css" />
+</block>
+
+<block name="content">
+	<!--banner图-->
+	<div class="beancontbox">
+		<div class="bannerbox">
+			<div class="banleft">
+				<div class="swiper-container">
+				    <div class="swiper-wrapper">
+				    	<volist name="banners" id="banner">
+				        	<div class="swiper-slide">
+				        		<if condition="empty($banner['link_url'])">
+                                    <img src="{$banner['abs_url']}" style="object-fit: cover" />
+                                    <else/>
+                                    <a href="{$banner['link_url']}" target="_blank">
+                                        <img src="{$banner['abs_url']}" style="object-fit: cover" />
+                                    </a>
+                                </if>
+				        	</div>
+				    	</volist>
+				    </div>
+				    <div class="swiper-pagination"></div><!--分页器。如果放置在swiper-container外面，需要自定义样式。-->
+				</div>
+				
+				
+			</div>
+			<div class="banright">
+				<div class="rigtop">
+					<a href="javascrpt:void(0)"><img src="__IMG__/index/logo.png" /></a>
+				</div>
+				<div class="rigbot">
+					<a href="{:U('Enroll/signUp')}" class="arukou">全国报名通道</a>
+				</div>
+				<div class="addtxta">
+				<!-- <a style="margin-top: 10px !important"  class="arukou">海外报名通道</a> -->
+				  <p class="textps">原创音乐人才</p>
+				  <p class="textps">全国海选</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!--内容模块-->
+	<div class="contsbox">
+		<div class="indexcont">
+			<div class="contbs">
+				<div class="headcont">
+					<div class="conlet"><span>活动</span>
+						<a>花絮</a><img src="__IMG__/index/top.png" /></div>
+					<div class="mored">
+						<a href="javascrpt:void(0)"><!-- <span>发现更多</span><img src="__IMG__/index/more.png" /> --></a>
+					</div>
+				</div>
+				<div class="licons">
+					<ul>
+						<volist name="reviews" id="review">
+							<li>
+								<a href="{$review['forward']}">
+									<img src="{$review['cover']}" />
+									<p>{$review['title']}</p>
+									<if condition="!empty($review['video_id'])">
+									<i><img src="__IMG__/index/lunbo.png"/></i>
+									</if>
+								</a>
+							</li>
+						</volist>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</block>
+
+<block name="footer-script">
+	<script type="text/javascript" src="__JS__/swiper.js" ></script>
+	<script language="javascript"> 
+		var mySwiper = new Swiper('.swiper-container',{
+			autoplay: true,//可选选项，自动滑动
+			pagination: {
+		    	el: '.swiper-pagination',
+		  	},
+		})
+	</script>
+</block>

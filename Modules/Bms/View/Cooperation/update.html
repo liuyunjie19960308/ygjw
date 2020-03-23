@@ -1,0 +1,116 @@
+<extend name="Public/base" />
+
+<block name="main">
+
+    <div class="x-body" style="margin: 50px">
+        <form class="layui-form">
+            <input type="hidden"  value="<?php echo $list['id']?>" name="id"  class="layui-input">
+            <div class="layui-form-item">
+                <label for="name" class="layui-form-label">
+                    <span class="x-red">*</span>合作伙伴类别名
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="name" value="<?php echo $list['name'];?>" name="name" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>
+                </div>
+            </div>
+
+
+  
+            <div class="layui-upload" style="margin-left: 110px">
+                <div class="controls">
+                    {:hook('upload',array('is_first'=>1,'queue_limit'=>20,'unique_sign'=>'pictures','field_name'=>'images','field_value'=>$list['images'],'save_path'=>'News'))}
+            <span class="help-block">* 合作伙伴商标</span>
+        </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="sort" class="layui-form-label">
+                    <span class="x-red">*</span>排序
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="sort" name="sort" required="" lay-verify="sort"
+                           autocomplete="off" class="layui-input" value="<?php echo $list['sort'];?>">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    数字升序排序
+                </div>
+            </div>
+            
+            <div style="margin-left: 100px">
+                <button  class="layui-btn" lay-filter="save" lay-submit="">
+                    确定
+                </button>
+                <button  onclick="javascript:history.back(-1);return false;" class="layui-btn layui-btn-primary" >
+                    返 回
+                </button>
+            </div>
+        </form>
+    </div>
+    <script>
+        //一般直接写在一个js文件中
+        layui.use(['form','layer','upload'], function(){
+            $ = layui.jquery;
+            var form = layui.form
+                ,layer = layui.layer
+                ,upload = layui.upload;
+            //自定义验证规则
+            form.verify({
+                name: function(value){
+                    if(value.length < 5){
+                        return '名称至少得5个字符啊';
+                    }
+                }
+
+            });
+            //监听提交
+            form.on('submit(save)', function(data){
+                $.post("{:U('Cooperation/update')}",$(data.form).serialize(),
+                    function(res){
+                        if(res.code==200){
+                            layer.alert(res.msg, {icon: 6},function () {
+
+                                window.location.href="{:U('Cooperation/lists')}";
+                            });
+                        }
+                        if(res.code==201){
+                            layer.alert(res.msg, {icon: 5});
+                        }
+
+                    },'json');
+                return false;
+                //发异步，把数据提交给php
+
+
+            });
+       
+        });
+    </script>
+    <script>
+        //重置ids
+        function setFileIds(obj,parent) {
+            var ids = [];
+            $(".element-box").find('.element-item').each(function(){
+                ids.push($(this).attr('data-val'));
+            });
+            if(ids.length > 0)
+                $(".values").val(ids.join(','));
+            else
+                $(".values").val('');
+        }
+        function removeElement(obj, parent) {
+            $(obj).parent().remove();
+            setFileIds(obj, parent);
+        }
+    </script>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <include file="Public/modal_goods"/>
+
+</block>

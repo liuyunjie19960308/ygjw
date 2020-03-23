@@ -1,0 +1,98 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+    <link rel="stylesheet" href="__CSS__/index.css" />
+    <link rel="stylesheet" href="__CSS__/login.css" />
+    <link rel="stylesheet" href="__CSS__/signup.css" />
+    <link rel="stylesheet" href="__CSS__/activity.css" />
+</block>
+
+<block name="content">
+
+		<div class="logincont">
+			<div class="loghead">国内海选报名通道</div>
+			
+			<div class="tablebox showa">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th>赛区</th>
+							<th>承办单位</th>
+							<th>咨询电话</th>
+						</tr>
+					</thead>
+					<tbody>
+						<volist name="agencys" id="agency">
+							<tr data-id="{$agency['agency_id']}">
+								<th>{$agency['title']}</th>
+								<th>{$agency['agency']}</th>
+								<th>{$agency['tel']}</th>
+							</tr>
+						</volist>
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="ljdle">
+				<a href="javascript:void(0)">点击对应省份，了解地市县承办单位</a>
+			</div>
+		</div>
+	</block>
+	
+		<block name="youling">
+			<div class="menas">
+				<div class="bamconts xoapvs">
+					<img src="__IMG__/closea.png" class="guanbi" />
+					<div class="tablebox">
+						<table border="0" cellpadding="0" cellspacing="0">
+							<thead>
+								<tr>
+									<th>海选地点</th>
+									<th>地址</th>
+									<th>咨询电话</th>
+								</tr>
+							</thead>
+							<tbody class="ccc">
+								
+							</tbody>
+						</table>
+					</div>
+					
+				</div>
+			</div>
+		</block>
+<block name="footer-script">
+        <script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js" ></script>
+        <script src="__JS__/distpicker.data.js"></script>
+		<script src="__JS__/distpicker.js"></script>
+		<script src="__JS__/main.js"></script>
+    <script>
+    	$(function(){
+    		$(".guanbi").click(function(){
+    			$(".menas").hide();
+    		})
+    		$(".showa table tr").click(function(){
+                var agency_id = $(this).attr('data-id');
+
+                $.post('{:U("Agency/getAudition")}',{agency_id:agency_id}).success(function(data) {
+                  if (data.status == 1) {
+                    var html = '';
+                    for(var i in data.data) {
+                        html += "<tr>"+
+                                    "<th>"+data.data[i].title+"</th>"+
+                                    "<th>"+data.data[i].address+"</th>"+
+                                    "<th>"+data.data[i].tel+"</th>"+
+                                "</tr>";
+                    }
+
+                    $('.ccc').html(html);
+                  } else {
+                      
+                  }
+                });
+
+    			$(".menas").show();
+    		})
+    	})
+    </script>
+</block>

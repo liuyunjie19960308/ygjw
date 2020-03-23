@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <title>中国好诗歌</title>
+        <link rel="stylesheet" href="__CSS__/public.css" />
+        <block name="header-style"></block>
+    </head>
+    <script>
+        //      window.onresize = function(){
+        //document.documentElement.style.fontSize = document.documentElement.offsetWidth / 20 +'px';
+        //}
+    </script>
+
+    <body>
+        <div class="boxhtml">
+            <!--头部-->
+            <div class="heacw">
+                <div class="headbox">
+                    <div class="headleft">
+                        <a class="addclo" href="/">首页</a>
+                        <a href="{:U('Enroll/acation')}">评委资质认证</a>
+                        <!-- <a href="{:U('Trainees/index')}"> --><a href="javascript:void(0)">明星选手</a>
+                    </div>
+                    <div class="logoimg"><img src="__IMG__/index/logo.png" /></div>
+                    <div class="headright">
+                        <a href="{:U('Bussiness/index')}">全国招商</a>
+                        <!-- <a href="javascrpt:void(0)">活动公示</a> -->
+                        <a href="javascript:void(0)"  class="xssqdle">
+                            <span>活动公示</span>
+                            <!-- <span class="gscont">
+                                <i class="sqhtml" onclick="window.location.href='{:U('Agency/index')}'">赛区公示</i>
+                                <i class="sxgsdle" onclick="window.location.href='{:U('UserProfile/index')}'">选手公示</i>
+                            <span/> -->
+                        </a>
+                        <a href="{:U('About/index')}">海外报名</a>
+                        <!-- <a href="javascript:void(0)">海外报名</a> -->
+                        <a href="{:U('Passport/login')}" class="login">登录</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <block name="content">
+                
+            </block>
+
+            <div class="footerbox">
+                <div class="footercot">
+                    <div class="leftrights">
+                        <div class="fotlet">
+                            <p class="zmname">全国报名/商务合作咨询热线</p>
+                            <p class="zmiphnone">400-629-8890</p>
+                            <p class="zmname">大客户专线</p>
+                            <p class="zmiphnone">13820564016</p>
+                            <p class="zmiphnone">15332118321</p>
+                            <p class="zmtime"><img src="__IMG__/index/kefi.png" /><span>工作时间：</span>
+                                <a>9:00-21:00（工作日）</a>
+                            </p>
+                            <!-- <p class="delcont">@中国好诗歌全国海选组委会</p> -->
+                            <!-- <p class="dwcont">
+                                <span>主办单位：</span>
+                                <a href="javascript:void(0)"><img src="__IMG__/index/tiems.png" /></a>
+                                <a href="javascript:void(0)"><img src="__IMG__/index/tiems.png" /></a>
+                            </p> -->
+                        </div>
+                        <div class="fotrig">
+                            <div class="contslet">
+                                <img src="__IMG__/index/gfkefu.jpg" />
+                                <p>扫码关注</p>
+                                <p>官方客服号</p>
+                            </div>
+                            <div class="contslet" style="text-align: center;">
+                                <img src="__IMG__/index/weibo.jpg" />
+                                <p>扫码关注</p>
+                                <p>好诗歌微博</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footcons">
+                        <p>Copyright@2018 AII Rights Reserved Designed</p>
+                        <a style="color: #fff" href="http://www.beian.miit.gov.cn/">{:C('WEB_SITE_ICP')}</a>
+                    </div>
+                </div>
+            </div>
+
+            <include file="Public/notification"/>
+        </div>
+
+        <block name="youling"></block>
+
+        <script type="text/javascript" src="__JS__/jQuery.js" ></script>
+        <script type="text/javascript" src="__JS__/public.js" ></script>
+
+        <block name="footer-script"></block>
+
+    </body>
+</html>

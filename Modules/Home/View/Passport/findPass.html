@@ -1,0 +1,130 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+	<link rel="stylesheet" href="__CSS__/index.css" />
+	<link rel="stylesheet" href="__CSS__/login.css" />
+</block>
+
+<block name="content">
+			
+	<div class="logincont">
+		
+		
+		<div class="loghead">海选重置密码</div>
+		<div class="logname">
+			<span>姓名：</span>
+			<input type="text" name="name" class="fsnum" placeholder="请输入姓名" />
+			<i></i>
+		</div>
+		<div class="logpawd logname">
+			<span>手机号码：</span>
+			<input type="text" name="mobile" class="pwds"  placeholder="请输入手机号" />
+			<i></i>
+		</div>
+		<div class="logpawd logname">
+			<span>身份证号：</span>
+			<input type="text" name="id_num" class="pwds"  placeholder="请输入身份证号" />
+			<i></i>
+		</div>
+		<div class="logpawd logname">
+			<span>重置密码：</span>
+			<input type="password" name="password" class="pwds"  placeholder="请重置登录密码" />
+			<i></i>
+		</div>
+		<div class="logpawd logname">
+			<span>确认密码：</span>
+			<input type="password" name="re_password" class="pwds"  placeholder="请输入确认密码" />
+			<i></i>
+		</div>
+		<div class="logpawd logname saiqucont" data-toggle="distpicker"  >
+			<span>赛区：</span>
+
+				<select class="form-control" name="province_name" id="province1" class="province_name"></select>
+        		<select class="form-control" name="city_name" id="city1" class="city_name"></select>
+        		<select class="form-control" name="area_name" id="district1" class="area_name"></select>
+
+			<i></i>
+		</div>
+		<div class="logpawd logname gasxa">
+			<span>高校赛区：</span>
+			<select name="college_division" class="college_division">
+				<option value="">——请选择——</option>
+				<volist name="colleges" id="college">
+			        <option value="{$college}">{$college}</option>
+			    </volist>
+			</select>
+			<i></i>
+		</div>
+		<div class="loginbtn login-btn">提交</div>
+	</div>
+			
+</block>
+<block name="footer-script">
+    <script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js" ></script>
+    <script src="__STATIC__/validform_5.3.2/Validform_v5.3.2_min.js"></script>
+    <script src="__JS__/validform.js"></script>
+    <script src="__JS__/common.js"></script>
+    <script src="__JS__/distpicker.data.js"></script>
+    <script src="__JS__/distpicker.js"></script>
+    <script src="__JS__/main.js"></script>
+
+     <script>
+        $(function(){
+
+            var name,id_num,mobile,province_name,city_name,area_name,college_division,password,re_password;
+
+            $(".login-btn").click(function(){
+				name             = $('input[name="name"]').val();
+                id_num           = $('input[name="id_num"]').val();
+                mobile           = $('input[name="mobile"]').val();
+                password         = $('input[name="password"]').val();
+                re_password      = $('input[name="re_password"]').val();
+                province_name    = $('#province1 option:selected').val();
+                city_name        = $('#city1 option:selected').val();
+                area_name        = $('#district1 option:selected').val();
+                college_division = $('.college_division option:selected').val();
+
+                if (name == '') {
+                  showPop('请输入您的姓名！', 'error', 1500, ''); return;
+                }
+                if (mobile == '') {
+                  showPop('请输入手机号码！', 'error', 1500, ''); return;
+                }
+                if (id_num == '') {
+                  showPop('请输入身份证号！', 'error', 1500, ''); return;
+                }
+                if (password == '') {
+                  showPop('请输入新密码！', 'error', 1500, ''); return;
+                }
+                if (password.length < 6) {
+                  showPop('密码长度6-18位！', 'error', 1500, ''); return;
+                }
+                if (re_password == '') {
+                  showPop('请输入确认密码！', 'error', 1500, ''); return;
+                }
+                if (password != re_password) {
+                  showPop('新密码和确认密码不一致！', 'error', 1500, ''); return;
+                }
+                if ((province_name == '' || city_name == '' || area_name == '') && college_division == '') {
+                  showPop('请选择赛区！', 'error', 1500, ''); return;
+                }
+
+                if (college_division != '') {
+                  division = college_division;
+                } else {
+                  division = province_name+city_name+area_name;
+                }
+
+                $.post('{:U("Passport/doFindPass")}',{name:name,id_num:id_num,mobile:mobile,division:division,password:password,re_password:re_password}).success(function(data) {
+                  if (data.status == 1) {
+                  	  alert(data.info);
+                      window.location.href='{:U("Passport/login")}';
+                  } else {
+                      showPop(data.info, 'error', 1500, ''); return;
+                  }
+                });
+            });
+
+          })
+     </script>
+</block>

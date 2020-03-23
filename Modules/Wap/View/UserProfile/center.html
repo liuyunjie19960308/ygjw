@@ -1,0 +1,55 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+    <link rel="stylesheet" href="__CSS__/bmsuccess.css" />
+</block>
+
+<block name="content">
+	<div class="subox">
+		<div class="xuhead">
+			<p class="tiohea">2020中国好诗歌</p>
+			<p class="oansa">全国海选参赛资格证</p>
+			<img src="{$profile['avatar_path']}" class="touxiang" />
+		</div>
+		<div class="quconts">
+			<div class="qicosli">
+				<span>NO：</span>
+				<input type="text" value="{$profile['sn']}" readonly="readonly" />
+			</div>
+			<div class="qicosli">
+				<span>姓名：</span>
+				<input type="text" value="{$profile['name']}" readonly="readonly" />
+			</div>
+			<div class="qicosli">
+				<span>手机号码：</span>
+				<input type="text" value="{$profile['mobile']}" readonly="readonly" />
+			</div>
+			<div class="qicosli">
+				<span>赛区：</span>
+				<input type="text" value="{$profile['division']}" readonly="readonly" />
+			</div>
+			<div class="qicosli">
+				<span>证件号码：</span>
+				<input type="text" value="{$profile['id_num']}" readonly="readonly" />
+			</div>
+		</div>
+	
+	    <if condition="$profile['status'] eq 0">
+    		<div class="bmtxt">恭喜您报名成功，组委会将按照报名顺序通知参赛，请耐心等待！</div>
+    	</if>
+    	<if condition="$profile['status'] eq 1">
+            <div class="bmtxt">恭喜您报名成功，组委会将按照报名顺序通知参赛，请耐心等待！</div>
+    		<!-- <div class="bmtxt">恭喜您报名信息已通过审核！</div> -->
+    	</if>
+    	<if condition="$profile['status'] eq 2">
+            <div class="bmtxt">恭喜您报名成功，组委会将按照报名顺序通知参赛，请耐心等待！</div>
+    		<!-- <div class="bmtxt">您的报名申请已被拒，原因【{$profile['refuse_remark']}】！</div> -->
+    	</if>
+	    <div class="smconta">
+	    	<p>1、所有海选赛事均以官方网站/微博/公众号公 示为准，如若选手参加未公示的赛事均为无效 赛事，一切后果自行承担</p>
+            <if condition="in_array($profile['classes'], ['词曲创作人（词曲创作为同1人或由作词1人+作曲1人的组合）','全能艺人（演唱+词曲创作）'])">
+    		<p>2、请将个人音频资料按照以下 格式发送至邮箱： zghaosg@163.com（邮件标 题：参赛证编号+姓名+赛区+手机号）</p>
+	    	</if>
+	    </div>
+	</div>
+</block>

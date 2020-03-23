@@ -1,0 +1,194 @@
+<extend name="Public/base" />
+
+<block name="main">
+
+    <div class="row-fluid main-row-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab1">账号信息</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab2">我的</a></li>
+                </ul>
+                <!--<div class="widget-title"></div>-->
+                <br>
+                <div class="widget-content tab-content no-padding">
+
+                    <div id="tab1" class="tab-pane active">
+                        <table class="bill-table" style="width:70%">
+                            <tr class="bg-tr">
+                                <td colspan="5" align="center">账户信息</td>
+                                <td width="50" align="right">
+                                    <a href="{:U('Member/update',array('id'=>$row['id']))}" title="编辑" class="">
+                                        <span class="label label-success label-success-hover">编辑</span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="15%">用户ID</td><td width="30%">{$row['id']}</td>
+                                <td width="15%">用户编号</td><td colspan="2">{$row['member_sn']}</td>
+                                <td rowspan="4" style="width:160px">
+                                    <img src="{$row['avatar_path']}" width="160">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>登陆账号</td>
+                                <td>{$row['account']}　
+                                    <if condition="$row['extra']['qq'] eq 1"><i class="fa fa-qq" title="已绑定QQ"></i><else/><i class="fa fa-qq" style="color: #ccc"></i></if>
+                                    <if condition="$row['extra']['wx'] eq 1"><i class="fa fa-weixin" title="已绑定微信"></i><else/><i class="fa fa-weixin" style="color: #ccc"></i></if>
+                                </td>
+                                <td>账号状态</td><td colspan="2">{$row['status']|get_status_title}</td>
+                            </tr>
+                            <tr>
+                                <td>昵称</td><td>{$row['nickname']}</td>
+                                <td>性别</td><td colspan="2">{$row['gender'] == 1 ? '--' : '--'}</td>
+                            </tr>
+                            <tr>
+                                <td>手机号码</td><td>{$row['mobile']}</td>
+                                <td>邮箱</td><td colspan="2">{$row['email']|default='---'}</td>
+                            </tr>
+                            <tr>
+                                <!--<td align="center">头像</td>-->
+                                <td>地址</td><td colspan="4">{$row['province_name']}{$row['city_name']}{$row['district_name']}</td>
+                                <td align="center">{$row['extra']['level_name']}</td>
+                            </tr>
+                        </table>
+                        <br><br>
+                        <table class="bill-table" style="width:70%">
+                            <tr class="bg-tr">
+                                <td colspan="3" align="center">财务资料</td>
+                            </tr>
+                            <tr>
+                                <td width="15%">邀请编号</td>
+                                <td>{$row['member_sn']}</td>
+                                <td rowspan="4" style="width:160px">
+                                    <img src="{$row['code_path']}" width="160">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>余额</td>
+                                <td>￥ {$row['balance']}</td>
+                            </tr>
+                            <tr>
+                                <td>积分</td>
+                                <td>{$row['integral']}</td>
+                            </tr>
+                            <tr>
+                                <td>分销佣金</td>
+                                <td>{$row['brokerage']}</td>
+                            </tr>
+                            <tr>
+                                <td>流水</td>
+                                <td colspan="3">
+                                    <a href="{:U('RbtOrderInfo/index', ['m_id'=>$row['id']])}" title="返利订单记录" class="" target="_blank">
+                                        <span class="badge badge-warning badge-warning-hover">订单记录</span></a>
+                                    <a href="{:U('FinanceBalanceRecords/index', ['m_id'=>$row['id']])}" title="余额记录" class="" target="_blank">
+                                        <span class="badge badge-warning badge-warning-hover">余额记录</span></a>
+                                    <a href="{:U('FinanceTradeRecords/index', ['m_id'=>$row['id']])}" title="第三方交易" class="" target="_blank">
+                                        <span class="badge badge-warning badge-warning-hover">第三方交易</span></a>
+                                    <a href="{:U('FinanceIntegralRecords/index', ['m_id'=>$row['id']])}" title="积分记录" class="" target="_blank">
+                                        <span class="badge badge-warning badge-warning-hover">积分记录</span></a>
+                                    <a href="{:U('FinanceWithdrawRecords/index', ['m_id'=>$row['id']])}" title="提现记录" class="" target="_blank">
+                                        <span class="badge badge-warning badge-warning-hover">提现记录</span></a>
+                                </td>
+                            </tr>
+                        </table>
+                        <br><br>
+                        <table class="bill-table" style="width:70%">
+                            <tr class="bg-tr">
+                                <td colspan="3" align="center">其他</td>
+                            </tr>
+                            <tr>
+                                <td width="15%">登陆次数</td>
+                                <td>{$row['login_times']} 次</td>
+                            </tr>
+                            <tr>
+                                <td>最后登录IP</td>
+                                <td>{:long2ip($row['last_login_ip'])}</td>
+                            </tr>
+                            <tr>
+                                <td>最后登录时间</td>
+                                <td>{$row['last_login_time']|timestamp2date}</td>
+                            </tr>
+                            <tr>
+                                <td>注册IP</td>
+                                <td>{:long2ip($row['register_ip'])}</td>
+                            </tr>
+                            <tr>
+                                <td>注册时间</td>
+                                <td>{$row['create_time']|timestamp2date}</td>
+                            </tr>
+                            <tr>
+                                <td>最后更新时间</td>
+                                <td>{$row['update_time']|timestamp2date}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div id="tab2" class="tab-pane">
+                        <table class="bill-table" style="width:70%">
+                            <tr class="bg-tr">
+                                <td colspan="3" align="center">收货地址</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <empty name="adr_list">
+                                        <div class="credit-card float-left">未添加</div>
+                                    </empty>
+                                    <volist name="adr_list" id="adr">
+                                        <div class="credit-card float-left">
+                                            {$adr['contacts']}<br>
+                                            {$adr['mobile']}<br>
+                                            {$adr['province_name']}{$adr['city_name']}{$adr['district_name']}{$adr['address']} <br>
+                                        </div>
+                                    </volist>
+                                    <div class="clear"></div>
+                                </td>
+                            </tr>
+                            <tr class="bg-tr">
+                                <td colspan="3" align="center">提现账户</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <empty name="uwa_list">
+                                        <div class="credit-card float-left">未添加</div>
+                                    </empty>
+                                    <volist name="uwa_list" id="uwa">
+                                        <div class="credit-card float-left">
+                                            <img src="{$uwa['agency_logo']}">　{$uwa['agency_name']}<br><br>
+                                            账号：{$uwa['account_number']}<br>
+                                        </div>
+                                    </volist>
+                                    <div class="clear"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div id="tab3" class="tab-pane"></div>
+                    <div id="tab4" class="tab-pane"></div>
+
+                    <div class="form-actions">
+                        <button class="btn" onclick="javascript:history.back(-1);return false;">返 回</button>　
+                    </div>
+
+                    <!--<div id="tab7" class="tab-pane">
+                        <div class="invoice-content">
+                            <div class="invoice-head invoice-left">
+                                <h5>
+                                    <br>
+                                    <ul class="stat-boxes">
+                                        {//hook('statistics',array('is_first'=>1,'stat_type'=>1,'peity'=>'bar-warning','title_text'=>'消费金额','title_en_text'=>'RMB','data'=>$stat['pay'],'default'=>0.00))}
+                                        {//hook('statistics',array('stat_type'=>1,'peity'=>'bar-success','title_text'=>'充值金额','title_en_text'=>'RMB','data'=>$stat['charge'],'default'=>0.00))}
+                                        {//hook('statistics',array('stat_type'=>1,'peity'=>'bar-info','title_text'=>'提现金额','title_en_text'=>'RMB','data'=>$stat['wd'],'default'=>0.00))}
+                                    </ul>
+                                    <div class="clear"></div>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

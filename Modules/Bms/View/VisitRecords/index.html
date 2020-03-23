@@ -1,0 +1,75 @@
+<extend name="Public/base" />
+
+    <block name="main">
+
+    <div class="row-fluid main-row-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="javascript:void(0)" data-toggle="">访问记录</a>
+                    </li>
+                    <!-- <li>
+                        <a href="{:U('Lottery/raffleRecords')}" data-toggle="">抽奖记录</a>
+                    </li> -->
+                </ul>
+
+               <div class="widget-title widget-title-search list-widget-title">
+                   <button class="btn btn-danger confirm ajax-post" url="{:U('VisitRecords/delete',array('model'=>'VisitRecords'))}" target-form="ids">删除</button>&nbsp;
+                   <form action="{:U('VisitRecords/index')}" method="post" class="form">
+                       <!-- <input type="text" name="account" value="{$_REQUEST['account']}" placeholder="输入执行者账号">
+                       <button class="btn btn-inverse">查询</button> -->
+                   </form>
+                </div>
+
+                <div class="widget-content no-padding no-border">
+                    <table class="table table-bordered table-striped with-check reset-checkbox">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" id="title-checkbox" name="title-checkbox" class="check-all"/><!--<i class="icon-resize-vertical"></i>--></th>
+                            <th>ID</th>
+                            <th>用户资料</th>
+                            <th>IP地址</th>
+                            <th>页面标题</th>
+                            <th>页面路径</th>
+                            <th>停留时间</th>
+                            <th>访问时间</th>
+                            <th>城市</th>
+                            <th>载体</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+                        <empty name="list"><tr><td colspan="30">Aho！没有查询结果！！</td></tr></empty>
+                        <volist name="list" id="row">
+                        <tr>
+                            <td><input type="checkbox" name="ids[]" value="{$row['id']}" class="ids"/></td>
+                            <td>{$row['id']}</td>
+                            <td>{$row['account']|default='---'}</td>
+                            <td>{$row['ip_plaintext']}</td>
+                            <td>{$row['page_code']}：{$row['page_title']|default='---'}</td>
+                            <td>{$row['page_url']}</td>
+                            <td>{$row['stay_time']} s</td>
+                            <td>{$row['in_time'],'Y-m-d H:i:s'|timestamp2date} ~ {$row['out_time'],'H:i:s'|timestamp2date}</td>
+                            <td>{$row['city']|default='---'}</td>
+                            <td>{$row['carrier']|default='---'}</td>
+                            <td>
+                                <a href="{:U('VisitRecords/delete',array('model'=>'VisitRecords','ids'=>$row['id']))}" title="移除" class="confirm ajax-get">
+                                    <span class="label label-important label-important-hover">移除</span></a>
+                            </td>
+                        </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination alternate">
+                    {$page}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </block>

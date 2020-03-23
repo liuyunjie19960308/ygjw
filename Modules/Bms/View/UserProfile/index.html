@@ -1,0 +1,177 @@
+<extend name="Public/base" />
+
+<block name="main">
+    <div class="row-fluid main-row-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+
+                <ul class="nav nav-tabs">
+                    <li <if condition="$_REQUEST['type'] eq 1">class="active"</if>>
+                        <a href="{:U('UserProfile/index',['type'=>'1'])}" data-toggle="">选手列表</a>
+                    </li>
+                    <li <if condition="$_REQUEST['type'] eq 2">class="active"</if>>
+                        <a href="{:U('UserProfile/index',['type'=>'2'])}" data-toggle="">评委列表</a>
+                    </li>
+                </ul>
+
+                <div class="widget-title widget-title-search list-widget-title">
+                    <!-- <button class="btn btn-success href" url="{:U('UserProfile/add')}" target-form="ids">新增</button>&nbsp; -->
+                    <!-- <button class="btn btn-inverse ajax-post" url="{:U('UserProfile/forbidResume',array('model'=>'UserProfile','field'=>'status','value'=>0))}" target-form="ids">禁用</button>&nbsp;
+                    <button class="btn btn-info ajax-post" url="{:U('UserProfile/forbidResume',array('model'=>'UserProfile','field'=>'status','value'=>1))}" target-form="ids">启用</button>&nbsp; -->
+                    <button class="btn btn-primary href" url="{:U('UserProfile/export', $_REQUEST)}">导出数据</button>&nbsp;
+                    <form action="{:U('UserProfile/index')}" method="post" class="form">
+                        <input type="hidden" name="type" value="{$_REQUEST['type']}" placeholder="">
+                        <input type="text" name="name" value="{$_REQUEST['name']}" placeholder="姓名">
+                        <button class="btn btn-inverse">查询</button>
+                        <button type="button" class="btn btn-warning senior">高级</button>
+                        <div class="senior-search" style="width: 250px;height: 200px;">
+                            <p>
+                                <input type="text" id="start" name="start_date" value="{$_REQUEST['start_date']}" placeholder="时间段搜索-起始" readonly>
+                                <input type="text" id="end" name="end_date" value="{$_REQUEST['end_date']}" placeholder="时间段搜索-结束" readonly>
+                            </p>
+                            <!-- <p>
+                                <input type="text" name="city_name" value="{$_REQUEST['city_name']}" placeholder="城市名称">
+                            </p> -->
+                        </div>
+                    </form>
+                </div>
+
+                <div class="widget-content no-padding no-border">
+                    <table class="table table-bordered table-striped with-check reset-checkbox">
+                        <thead>
+                        <tr>
+                            <!-- <th><input type="checkbox" id="title-checkbox" name="title-checkbox" class="check-all"/> --><!--<i class="icon-resize-vertical"></i>--></th>
+                            <th>ID</th>
+                            <th>姓名</th>
+                            <th>证件</th>
+                            <th>电话</th>
+                            <th>职业</th>
+                            <th>赛区</th>
+                            <th>报名时间</th>
+                            <!-- <th>登陆次数</th>
+                            <th>最后登陆时间</th> -->
+                            <!-- <th>状态</th>
+                            <th>操作</th> -->
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+                        <empty name="list"><tr><td colspan="30">Aho！没有查询结果！！</td></tr></empty>
+                        <volist name="list" id="row">
+                            <tr>
+                                <!-- <td><input type="checkbox" name="ids[]" value="{$row['id']}" class="ids"/></td> -->
+                                <td>{$row['id']}</td>
+                                <td>
+                                    <img src="{$row['avatar_path']}" style="width: 30px;height: 30px" class="img-circle"> {$row['name']}
+                                    <if condition="$row['type'] eq 1">
+                                    <span class="badge badge-warning">选手</span>
+                                    <else/>
+                                    <span class="badge badge-warning">评委</span>
+                                    </if>
+                                </td>
+                                <td>{$row['id_num']}</td>
+                                <td>{$row['mobile']}</td>
+                                <td>{$row['profession']}</td>
+                                <td>{$row['division']|default='--'}</td>
+                                <td>{$row['create_time']|timestamp2date}</td>
+                                <!-- <td>{$row['login_times']} 次</td>
+                                <td>{$row['last_login_time']|timestamp2date}</td> -->
+                                <!-- <td>
+                                    <if condition="$row['status'] eq 0">
+                                        审核中...
+                                    </if>
+                                    <if condition="$row['status'] eq 1">
+                                        <span style="color: green">正常</span>
+                                    </if>
+                                    <if condition="$row['status'] eq 2">
+                                        <span style="color: red">已被拒</span>
+                                    </if>
+                                </td> -->
+                                <!-- <td>
+                                    <a href="{:U('UserProfile/update',array('id'=>$row['id']))}" title="编辑" class="tip-bottom">
+                                        <span class="label label-success">编辑</span></a>&nbsp;
+                                    <a href="{:U('UserProfile/detail',array('id'=>$row['id']))}" title="详情" class="">
+                                        <span class="label label-hover">详情</span></a>&nbsp;
+                                    <if condition="$row['status'] eq 0 or $row['status'] eq 1">
+                                        <a href="{:U('UserProfile/forbidResume',array('model'=>'UserProfile','ids'=>$row['id'],'field'=>'status','value'=>abs(1-$row['status'])))}" title="{$row['status']|show_status_name}" class="ajax-get">
+                                            <span class="label {$row['status']|show_status_label}">{$row['status']|show_status_name}</span></a>&nbsp;
+                                    </if>
+                                    <span class="navbar">
+                                    <ul class="nav">
+                                        <li id="fat-menu" class="dropdown" style="line-height: 26px;">
+                                            <a id="drop3" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                                                <span class="label label-primary label-primary-hover">更多操作<b class="caret"></b></span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labeledby="drop3">
+                                                <li role="presentation">
+                                                    <a href="#modal-refuse-pass" data-toggle="modal" title="拒绝通过" onclick="setID(this)" data-user-id="{$row['id']}">
+                                                    拒绝通过
+                                                    </a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="{:U('UserProfile/pass',array('ids'=>$row['id']))}" title="审核通过" data-confirm="确认该信息通过审核吗！" class="confirm ajax-get">
+                                                        审核通过</a>
+                                                </li>
+                                                <li role="presentation" class="divider"></li>
+                                                <li role="presentation">
+                                                    <a href="{:U('UserProfile/delete',array('model'=>'UserProfile','ids'=>$row['id'],'shop_id'=>$row['shop']['shop_id']))}" title="删除" data-confirm="您正在删除用户资料，请谨慎操作，确定要执行吗！" data-ing-html="正在删除 <i class='fa fa-spinner fa-spin'></i>" class="confirm ajax-get">
+                                                        删除</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    </span>
+                                </td> -->
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination alternate">
+                    {$page}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--拒绝弹出层-->
+    <include file="UserProfile/modal_refuse_pass"/>
+
+</block>
+<block name="script">
+    <!--日历 start-->
+    <script src="__STATIC__/laydate/laydate.js"></script>
+    <!--日历 end-->
+    <script type="text/javascript">
+        !function(){
+            laydate.skin('default'); //切换皮肤，请查看skins下面皮肤库
+        }();
+        //日期范围限制
+        var start = {
+            elem: '#start',
+            format: 'YYYY-MM-DD hh:mm:ss',
+            min: '2017-10-01',//laydate.now(), //设定最小日期为当前日期
+            max: '2030-06-16', //最大日期
+            istime: true,
+            istoday: false,
+            choose: function(datas){
+                end.min = datas; //开始日选好后，重置结束日的最小日期
+                end.start = datas //将结束日的初始值设定为开始日
+            }
+        };
+        var end = {
+            elem: '#end',
+            format: 'YYYY-MM-DD hh:mm:ss',
+            min: '2017-10-01',//laydate.now(),
+            max: '2030-06-16',
+            istime: true,
+            istoday: false,
+            choose: function(datas){
+                start.max = datas; //结束日选好后，充值开始日的最大日期
+            }
+        };
+        laydate(start);
+        laydate(end);
+    </script>
+</block>

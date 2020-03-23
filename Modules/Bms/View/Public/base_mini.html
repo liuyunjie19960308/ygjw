@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!--基本-->
+        <link rel="stylesheet" href="__CSS__/bootstrap.2.3.2.min.css" />
+        <link rel="stylesheet" href="__CSS__/font-awesome-4.7.0/font-awesome.min.css" />
+        <link rel="stylesheet" href="__CSS__/unicorn.main.min.css" />
+        <!--基本-->
+        <!--表单表格-->
+        <link rel="stylesheet" href="__CSS__/uniform.min.css" />
+        <!--表单表格-->
+        <!--扩展样式-->
+        <link rel="stylesheet" href="__CSS__/custom.css" />
+        <!--扩展样式-->
+        <!--jquery-->
+        <script src="__STATIC__/jquery.min.js"></script>
+        <!--jquery-->
+        <block name="style"></block>
+        <block name="head-script"></block>
+        <style>
+            body{background-color:#fff }
+        </style>
+    </head>
+    <body>
+
+        <div class="alert top-alert" style="display:none;z-index:10000000;width:100%;padding: 11px 35px 11px 14px;top:0px;border-radius: 0px;">
+            <button class="close" data-dismiss="alert"></button>
+            <strong></strong>
+        </div>
+
+        <!--主体内容-->
+        <div class="widget-box">
+            <block name="main"></block>
+        </div>
+
+        <!--基本-->
+        <script src="__JS__/bootstrap.min.js"></script>
+        <script src="__JS__/unicorn.min.js"></script>
+        <!--基本-->
+        <!--表单加载-->
+        <script src="__JS__/jquery.uniform.min.js"></script>
+        <!--表单加载-->
+        <script src="__JS__/common.js"></script>
+        <script src="__JS__/js.js"></script>
+        <!--弹出提示框-->
+        <script src="__JS__/jquery.gritter.min.js"></script>
+        <script src="__JS__/jquery.peity.min.js"></script>
+        <!--弹出提示框-->
+
+        <script>
+            //刷新页面
+            $('a.refresh').click(function(){ window.location.reload(); });
+        </script>
+
+        <block name="script"></block>
+    </body>
+</html>

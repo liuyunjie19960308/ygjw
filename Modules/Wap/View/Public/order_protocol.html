@@ -1,0 +1,24 @@
+<div class="underlying-bg order-protocol-bg" onclick="hideOrderProtocol(this)"></div>
+
+<div class="order-protocol-pop" style="display:none;position:fixed;left:10%;top:10%;z-index:5001;background:#fff;width:800px;border-radius:20px;padding:60px 20px">
+    <p style="color:#E1353A;font-size:38px;font-weight:bold;width:100%;text-align:center;padding:0 0 20px 0;">
+        {$art['title']}
+    </p> 
+    <div class="" style="width:100%;height:800px;overflow-y:scroll;padding:0 20px;">
+        {$art['content']}
+    </div>
+    <div class="protocol" style="padding:50px 0 0 30px;">
+        <input type="checkbox" name="protocol" id="protocol" onclick="" style="width:30px;height:30px;">同意上述协议　（请先同意上述协议）
+    </div>
+</div>
+
+<script>
+    function showOrderProtocol(o) {
+        $('.order-protocol-bg').show();
+        $('.order-protocol-pop').show();
+    }
+    function hideOrderProtocol(o) {
+        $('.order-protocol-bg').hide();
+        $('.order-protocol-pop').hide();
+    }
+</script>

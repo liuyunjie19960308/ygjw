@@ -1,0 +1,98 @@
+<extend name="Public/base" />
+
+<block name="main">
+    <div class="row-fluid main-row-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+                <!--<div class="widget-title">
+                    <span class="icon">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                    <h5>更新信息</h5>
+                </div>-->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab1">基本信息</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab2">详细内容</a></li>
+                </ul>
+
+                <form class="form-horizontal text-height-27-form" method="post" action="{:U('Trainees/update')}">
+                <div class="widget-content tab-content no-padding">
+                    <div id="tab1" class="tab-pane active">
+                        <input type="hidden" name="model" value="Trainees">
+                        <input type="hidden" name="id" value="{$row['id']}">
+                        <div class="control-group">
+                            <label class="control-label">姓名</label>
+                            <div class="controls">
+                                <input type="text" name="name" value="{$row['name']}" class="text-width-20" maxlength="10">
+                                <span class="help-block">* 选手姓名</span>
+                            </div>
+                        </div>
+                        <!-- <div class="control-group">
+                            <label class="control-label">导师</label>
+                            <div class="controls">
+                                <input type="text" name="mentor" value="{$row['mentor']}" class="text-width-20" maxlength="10">
+                                <span class="help-block">* </span>
+                            </div>
+                        </div> -->
+                        <div class="control-group">
+                            <label class="control-label">简介</label>
+                            <div class="controls">
+                                <input type="text" name="short_desc" value="{$row['short_desc']}" class="text-width-50" maxlength="100">
+                                <span class="help-block">* 选手简介</span>
+                            </div>
+                        </div>
+                        <!-- <div class="control-group">
+                            <label class="control-label">荣誉</label>
+                            <div class="controls">
+                                <input type="text" name="honor" value="{$row['honor']}" class="text-width-30" maxlength="60">
+                                <span class="help-block">* </span>
+                            </div>
+                        </div> -->
+                        <div class="control-group">
+                            <label class="control-label">展示封面</label>
+                            <div class="controls">
+                                {:hook('upload',array('is_first'=>1,'unique_sign'=>'show_cover','field_name'=>'show_cover','field_value'=>$row['show_cover'],'save_path'=>'Avatar'))}
+                                <span class="help-block">* 选手展示封面,570px X 262px</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">展示视频</label>
+                            <div class="controls">
+                                <include file="Public/upload-auth"/>
+                                <span class="help-block">选手展示视频</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">外链</label>
+                            <div class="controls">
+                                <input type="text" name="link_url" value="{$row['link_url']}" class="text-width-50" maxlength="200">
+                                <span class="help-block">外链</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab2" class="tab-pane">
+                        <div class="control-group">
+                            <label class="control-label">详细内容</label>
+                            <div class="controls">
+                                <textarea name="content">{$row['content']}</textarea>
+                                {:hook('adminArticleEdit', array('is_first'=>1,'name'=>'content','value'=>$row['content'],'width'=>910,'height'=>500))}
+                                <span class="help-block">* 详细内容</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn" onclick="javascript:history.back(-1);return false;">返 回</button>　
+                        <button class="btn btn-info ajax-post" target-form="form-horizontal" type="submit">保 存</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+
+</block>

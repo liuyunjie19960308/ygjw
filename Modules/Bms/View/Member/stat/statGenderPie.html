@@ -1,0 +1,12 @@
+<extend name="Public/base_mini" />
+
+<block name="main">
+
+    <!--统计图部分 start-->
+    <div class="row-fluid">
+        {:hook('statistics',array('is_first'=>1,'chart_id'=>'pie-container','chart_type'=>'pie','chart_data'=>$gender_pie,'title_icon'=>'pie-chart','title_text'=>'男女比例','series_name'=>'占总数的','core_content'=>1))}
+        <a class="refresh" title="刷新" style="position: absolute;top: 35px;right: 15px"><i class="fa fa-refresh"></i></a>
+    </div>
+    <!--统计图部分 end-->
+
+</block>

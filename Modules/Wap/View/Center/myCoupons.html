@@ -1,0 +1,57 @@
+<extend name="Public/base" />
+
+<block name="style">
+    <link rel="stylesheet" href="__CSS__/logoba/6-1-3my_quanbao.css">
+</block>
+
+<block name="content">
+    <div class="box coupon-box">
+        <if condition="!empty($list)">
+        <h2>可用券</h2>
+        <volist name="list" id="coupon">
+            <if condition="$coupon['status'] eq 0">
+                <div class="youhuiquan">
+                    <img src="__IMG__/logoba/keyongquanditu.png" alt="">
+                    <div class="left">
+                        <p><text>￥</text><span>{:intval($coupon['face_value'])}</span></p>
+                        <p>{$coupon['type_name']}</p>
+                    </div>
+                    <div class="right">
+                        <h3>{$coupon['desc']}{$coupon['type_name']}</h3>
+                        <h4><if condition="$coupon['type'] eq 2">满{:intval($coupon['use_condition'])}减{:intval($coupon['face_value'])}</if></h4>
+                        <p>有效期至{$coupon['invalid_date']}</p>
+                        <button type="button" onclick="javascript:window.location.href='{$coupon[\'forward\']}'">立即使用</button>
+                    </div>
+                </div>
+            </if>
+        </volist>
+        
+        <h2>不可用券</h2>
+        <volist name="list" id="coupon">
+            <if condition="$coupon['status'] neq 0">
+                <div class="youhuiquan guoqi">
+                    <img src="__IMG__/logoba/bukeyongquanditu.png" alt="">
+                    <div class="left">
+                        <p><text>￥</text><span>{:intval($coupon['face_value'])}</span></p>
+                        <p>{$coupon['type_name']}</p>
+                    </div>
+                    <div class="right">
+                        <h3>{$coupon['desc']}{$coupon['type_name']}</h3>
+                        <h4><if condition="$coupon['type'] eq 2">满 {:intval($coupon['use_condition'])} 减 {:intval($coupon['face_value'])}</if></h4>
+                        <p>有效期至{$coupon['invalid_date']}</p>
+                        <button type="button">
+                        <if condition="$coupon['status'] eq 1">已使用</if>
+                        <if condition="$coupon['status'] eq 2">已过期</if>
+                        <if condition="$coupon['status'] eq 9">已锁定</if>
+                        </button>
+                    </div>
+                </div>
+            </if>
+        </volist>
+        </if>
+    </div>
+</block>
+<block name="script">
+    
+
+</block>

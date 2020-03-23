@@ -1,0 +1,63 @@
+<style type="text/css">
+    .dps-box{background: #000000;padding: 0px 0 1px 0;position: fixed;z-index: 5001;width: 100%;bottom: 0;display: none;height: 100%;}
+    .dps-box .img{width: 100%;height: 980px;}
+    .dps-box .lookers{position: absolute;top: 0px;color: #fff;width: 100%;background: #666;padding: 30px;opacity:0.6;font-weight: bold;}
+    .dps-box button{width: 80%;height: 100px;font-size: 40px;background: #E5E5E5;border: none;outline: none;border-radius: 15px;display: block;margin: 40px auto;}
+    .xuanzhong{background: #FFC90C !important;}
+</style>
+<div class="underlying-bg dps-bg"></div>
+<div class="dps-box">
+    <div class="img">
+        <img src="__IMG__/logoba/logosheji(2).png" alt="" style="width: 100%; height: 100%" onclick="dpsHide(this)">
+        <!-- <div class="lookers">
+            <span class="best-number">0</span> 人觉得超赞，<span class="soso-number">0</span> 人觉得一般，<span class="bad-number">0</span> 人觉得辣眼
+        </div> -->
+    </div>
+    <button type="button" class="xuanzhong" onclick="like2die(this)">我喜欢这个logo，就它了</button>
+    <button type="button" onclick="better(this)">我觉得这个logo还可以更好一点</button>
+    <button type="button" onclick="pass(this)">辣眼睛，直接PASS</button>
+    <button type="button" onclick="dpsHide(this)">先不选，我在看看</button>
+</div>
+<script type="text/javascript">
+    var dp_id = 0;
+    function dpsShow(o) {
+        $('.dps-box').find('img').attr('src', $(o).find('img').attr('src'));
+        dp_id = $(o).attr('data-id');
+        $('.best-number').html($(o).attr('data-best'));
+        $('.soso-number').html($(o).attr('data-soso'));
+        $('.bad-number').html($(o).attr('data-bad'));
+        $('.dps-bg').show();
+        $('.dps-box').show();
+    }
+    function dpsHide(o) {
+        $('.dps-bg').hide();
+        $('.dps-box').hide();
+    }
+    function like2die(o) {
+        $.post("{:U('Center/chooseDp')}",{id:dp_id,status:1}).success(function(data) {
+            if (data.status == 1) {
+                dpsHide();
+            } else {
+                showPop(data.info, 'error', 1500, '');
+            }
+        });
+    }
+    function better(o) {
+        $.post("{:U('Center/chooseDp')}",{id:dp_id,status:2}).success(function(data) {
+            if (data.status == 1) {
+                dpsHide();
+            } else {
+                showPop(data.info, 'error', 1500, '');
+            }
+        });
+    }
+    function pass(o) {
+        $.post("{:U('Center/chooseDp')}",{id:dp_id,status:9}).success(function(data) {
+            if (data.status == 1) {
+                dpsHide();
+            } else {
+                showPop(data.info, 'error', 1500, '');
+            }
+        });
+    }
+</script>

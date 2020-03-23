@@ -1,0 +1,17 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+	<link rel="stylesheet" href="__CSS__/swiper.css" />
+</block>
+
+<block name="content">
+
+    <div class="bmwbox">
+        <volist name="materials" id="material">
+            <div class="masterbox">
+                <img src="{$material['pc_show']}" />
+            </div>
+        </volist>
+    </div>
+
+</block>

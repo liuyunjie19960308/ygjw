@@ -1,0 +1,191 @@
+<extend name="Public/base" />
+
+<block name="main">
+
+    <div class="x-body" style="margin: 50px">
+        <form class="layui-form">
+
+
+            <div class="layui-upload" style="margin-left: 110px">
+                <div class="controls">
+                    {:hook('upload',array('is_first'=>1,'unique_sign'=>'images','field_name'=>'images','field_value'=>$list['images'],'save_path'=>'News'))}
+                    <span class="help-block">* 城市图片 </span>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="name" class="layui-form-label">
+                    <span class="x-red">*</span>城市名
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="name" name="name" required="" value="<?php echo $list['name']?>"  lay-verify="name"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>
+                </div>
+            </div>
+            <input type="hidden" value="<?php echo $list['id']; ?> "name="id" >
+            <div class="layui-form-item">
+                <label for="phone" class="layui-form-label">
+                    <span class="x-red">*</span>电话
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="phone" name="phone" value="<?php echo $list['phone']?>"   required="" lay-verify="phone"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="place" class="layui-form-label">
+                    <span class="x-red">*</span>联系地址
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="place" name="place" required="" value="<?php echo $list['place']?>"  lay-verify="place"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="customer" class="layui-form-label">
+                    <span class="x-red">*</span>客户服务电话
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="customer" name="customer"  value="<?php echo $list['customer']?>" required="" lay-verify="customer"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="mailbox" class="layui-form-label">
+                    <span class="x-red">*</span>联系邮箱
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="mailbox" name="mailbox" required=""  value="<?php echo $list['mailbox']?>"   lay-verify="mailbox"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="sort" class="layui-form-label">
+                    <span class="x-red">*</span>排序
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="sort" name="sort" required="" value="<?php echo $list['sort']?>" lay-verify="sort"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    数字升序排序
+                </div>
+            </div>
+            <div style="margin-left: 100px">
+                <button  class="layui-btn" lay-filter="save" lay-submit="">
+                    确定
+                </button>
+                <button  onclick="javascript:history.back(-1);return false;" class="layui-btn layui-btn-primary" >
+                    返 回
+                </button>
+            </div>
+        </form>
+    </div>
+    <script>
+        //一般直接写在一个js文件中
+        layui.use(['form','layer','upload'], function(){
+            $ = layui.jquery;
+            var form = layui.form
+                ,layer = layui.layer
+                ,upload = layui.upload;
+            //自定义验证规则
+            form.verify({
+                name: function(value){
+                    if(value.length < 5){
+                        return '名称至少得5个字符啊';
+                    }
+                }
+
+            });
+            //监听提交
+            form.on('submit(save)', function(data){
+                $.post("{:U('EnterpriseContact/update')}",$(data.form).serialize(),
+                    function(res){
+                        if(res.code==200){
+                            layer.alert(res.msg, {icon: 6},function () {
+
+                                window.location.href="{:U('EnterpriseContact/lists')}";
+                            });
+                        }
+                        if(res.code==201){
+                            layer.alert(res.msg, {icon: 5});
+                        }
+
+                    },'json');
+                return false;
+                //发异步，把数据提交给php
+
+            });
+            //普通图片上传
+            var uploadInst = upload.render({
+                elem: '#test1'
+                ,url: "{:U('Banner/doUpload')}" //改成您自己的上传接口
+                ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#demo1').attr('src', result); //图片链接（base64）
+
+                    });
+                }
+                ,done: function(data){
+                    //如果上传失败
+                    if(data.code <0){
+                        return layer.msg('上传失败');
+                    }else {
+
+                        $('#pathimg').val(data.data);
+                    }
+
+                }
+                ,error: function(){
+                    //演示失败状态，并实现重传
+                    var demoText = $('#demoText');
+                    demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                    demoText.find('.demo-reload').on('click', function(){
+                        uploadInst.upload();
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        //重置ids
+        function setFileIds(obj,parent) {
+            var ids = [];
+            $(".element-box").find('.element-item').each(function(){
+                ids.push($(this).attr('data-val'));
+            });
+            if(ids.length > 0)
+                $(".values").val(ids.join(','));
+            else
+                $(".values").val('');
+        }
+        function removeElement(obj, parent) {
+            $(obj).parent().remove();
+            setFileIds(obj, parent);
+        }
+    </script>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <include file="Public/modal_goods"/>
+
+</block>

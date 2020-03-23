@@ -1,0 +1,39 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+	<link rel="stylesheet" href="__CSS__/index.css" />
+</block>
+
+<block name="content">
+	<!--内容模块-->
+	<div class="contsbox">
+		<div class="indexcont">
+			<div class="contbs">
+				<div class="headcont">
+					<div class="conlet"><span>明星</span>
+						<a>选手</a><img src="__IMG__/duos.png" style="width: 27px;height: 25px;vertical-align: middle;margin-top: -8px;" /></div>
+					
+				</div>
+				<div class="licons">
+					<ul>
+						<volist name="traineess" id="trainees">
+						<li>
+							<a href="{$trainees['forward']}">
+								<img src="{$trainees['show_cover']}" />
+								<p>{$trainees['short_desc']}</p>
+								<i><img src="__IMG__/index/lunbo.png"/></i>
+							</a>
+							
+						</li>
+						</volist>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</block>
+
+<block name="footer-script">
+	<script type="text/javascript" src="js/public.js" ></script>
+</block>

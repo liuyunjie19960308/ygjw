@@ -1,0 +1,73 @@
+<extend name="Public/base" />
+
+<block name="main">
+    <div class="row-fluid main-row-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+                <!--<div class="widget-title">
+                    <span class="icon">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                    <h5>更新信息</h5>
+                </div>-->
+                <br>
+                <div class="widget-content no-padding">
+                    <form class="form-horizontal text-height-27-form" method="post" action="{:U('AuditionAddress/update')}">
+                        <input type="hidden" name="model" value="AuditionAddress">
+                        <input type="hidden" name="id" value="{$row['id']}">
+                        <div class="control-group">
+                            <label class="control-label">赛区</label>
+                            <div class="controls">
+                                <div class="btn-group">
+                                    <button type="button" class="btn checked" data-default="--选择赛区--"></button>
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <volist name="agencys" id="agency">
+                                            <li data-value="{$agency['agency_id']}" data-title="{$agency['title']}" <eq name="agency['agency_id']" value="$row['agency_id']">class="selected"</eq>>
+                                                <a href="javascript:void(0)">{$agency['title']}</a>
+                                            </li>
+                                        </volist>
+                                    </ul>
+                                </div>
+                                <input type="hidden" name="agency_id" value="{$row['agency_id']}">
+                                <span class="help-block">* 必选项</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">地点名称</label>
+                            <div class="controls">
+                                <input type="text" name="title" value="{$row['title']}" class="text-width-20" maxlength="10">
+                                <span class="help-block">* 海选地点名称</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">地址</label>
+                            <div class="controls">
+                                <input type="text" name="address" value="{$row['address']}" class="text-width-30" maxlength="20">
+                                <span class="help-block">* 海选地址</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">电话</label>
+                            <div class="controls">
+                                <input type="text" name="tel" value="{$row['tel']}" class="text-width-30" maxlength="60">
+                                <span class="help-block">* 咨询电话</span>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" onclick="javascript:history.back(-1);return false;">返 回</button>　
+                            <button class="btn btn-info ajax-post" target-form="form-horizontal" type="submit">保 存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+
+</block>

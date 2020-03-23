@@ -1,0 +1,56 @@
+<extend name="Public/base" />
+
+<block name="header-style">
+	<link rel="stylesheet" href="__CSS__/index.css" />
+</block>
+
+<block name="content">
+	<!--banner图-->
+	<div class="beancontbox">
+		<div class="bannerbox">
+			<div class="banleft">
+				<volist name="banners" id="banner">
+					<a href="{$banner['link_url']}" target="_blank"><img src="{$banner['abs_url']}" /></a>
+				</volist>
+			</div>
+			<div class="banright">
+				<div class="rigtop">
+					<a href="javascrpt:void(0)"><img src="__IMG__/index/logo.png" /></a>
+				</div>
+				<div class="rigbot">
+					<a href="javascrpt:void(0)" class="arukou">报名入口</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!--内容模块-->
+	<div class="contsbox">
+		<if condition="!empty($reviews)">
+		<div class="indexcont">
+			<div class="contbs">
+				<div class="headcont">
+					<div class="conlet"><span>活动</span>
+						<a>花絮</a><img src="__IMG__/index/top.png" /></div>
+					<div class="mored">
+						<a href="javascrpt:void(0)"><span>发现更多</span><img src="__IMG__/index/more.png" /></a>
+					</div>
+				</div>
+				<div class="licons">
+					<ul>
+						<volist name="reviews" id="review">
+							<li>
+								<a href="javascrpt:void(0)">
+									<img src="{$review['cover']}" />
+									<p>{$review['title']}</p>
+								</a>
+							</li>
+						</volist>
+					</ul>
+				</div>
+			</div>
+		</div>
+		</if>
+	</div>
+</block>
+
